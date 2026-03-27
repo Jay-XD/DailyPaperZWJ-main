@@ -1,0 +1,544 @@
+{
+  "sources": {
+    "arxiv": {
+      "enabled": true,
+      "primary_categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.NI",
+        "cs.IT",
+        "eess.SP",
+        "eess.SY",
+        "stat.ML"
+      ],
+      "secondary_categories": [
+        "cs.CL",
+        "cs.MM",
+        "cs.CV"
+      ],
+      "max_results": 100,
+      "days_back": 7
+    },
+    "adapters": {
+      "crossref": {
+        "enabled": false,
+        "venues": [
+          "IEEE Journal on Selected Areas in Communications",
+          "IEEE Transactions on Wireless Communications",
+          "IEEE Transactions on Mobile Computing",
+          "IEEE Internet of Things Journal",
+          "IEEE/ACM Transactions on Networking",
+          "IEEE Transactions on Communications",
+          "IEEE Transactions on Vehicular Technology",
+          "IEEE Wireless Communications Letters"
+        ]
+      },
+      "dblp": {
+        "enabled": false,
+        "venues": [
+          "IEEE INFOCOM",
+          "IEEE Globecom",
+          "IEEE WCNC",
+          "IEEE ICC",
+          "AAAI",
+          "ICLR",
+          "ICML",
+          "NeurIPS"
+        ]
+      },
+      "openreview": {
+        "enabled": false,
+        "venues": [
+          "ICLR",
+          "ICML",
+          "NeurIPS"
+        ]
+      }
+    }
+  },
+  "venue_registry": {
+    "entries": {
+      "IEEE Journal on Selected Areas in Communications": {
+        "acronym": "JSAC",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "JSAC",
+          "IEEE JSAC",
+          "IEEE Journal on Selected Areas in Communications"
+        ]
+      },
+      "IEEE Transactions on Wireless Communications": {
+        "acronym": "TWC",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "TWC",
+          "IEEE TWC",
+          "IEEE Transactions on Wireless Communications"
+        ]
+      },
+      "IEEE Transactions on Mobile Computing": {
+        "acronym": "TMC",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "TMC",
+          "IEEE TMC",
+          "IEEE Transactions on Mobile Computing"
+        ]
+      },
+      "IEEE Internet of Things Journal": {
+        "acronym": "IoTJ",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "IoTJ",
+          "IEEE IoTJ",
+          "IEEE Internet of Things Journal"
+        ]
+      },
+      "IEEE/ACM Transactions on Networking": {
+        "acronym": "ToN",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "ToN",
+          "IEEE/ACM ToN",
+          "IEEE ACM ToN",
+          "IEEE/ACM Transactions on Networking",
+          "IEEE ACM Transactions on Networking"
+        ]
+      },
+      "IEEE Transactions on Communications": {
+        "acronym": "TCOM",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "TCOM",
+          "IEEE TCOM",
+          "IEEE Transactions on Communications"
+        ]
+      },
+      "IEEE Transactions on Vehicular Technology": {
+        "acronym": "TVT",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "TVT",
+          "IEEE TVT",
+          "IEEE Transactions on Vehicular Technology"
+        ]
+      },
+      "IEEE Wireless Communications Letters": {
+        "acronym": "WCL",
+        "type": "journal",
+        "tier": "core_comms",
+        "aliases": [
+          "WCL",
+          "IEEE WCL",
+          "IEEE Wireless Communications Letters"
+        ]
+      },
+      "IEEE INFOCOM": {
+        "acronym": "INFOCOM",
+        "type": "conference",
+        "tier": "core_comms",
+        "aliases": [
+          "INFOCOM",
+          "IEEE INFOCOM",
+          "IEEE International Conference on Computer Communications"
+        ]
+      },
+      "IEEE Globecom": {
+        "acronym": "Globecom",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "Globecom",
+          "GlobalCOM",
+          "IEEE Globecom",
+          "IEEE GlobalCOM",
+          "IEEE Global Communications Conference"
+        ]
+      },
+      "IEEE WCNC": {
+        "acronym": "WCNC",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "WCNC",
+          "IEEE WCNC",
+          "IEEE Wireless Communications and Networking Conference"
+        ]
+      },
+      "IEEE ICC": {
+        "acronym": "ICC",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "IEEE ICC",
+          "ICC",
+          "IEEE International Conference on Communications"
+        ]
+      },
+      "IEEE PIMRC": {
+        "acronym": "PIMRC",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "PIMRC",
+          "IEEE PIMRC",
+          "IEEE International Symposium on Personal, Indoor and Mobile Radio Communications"
+        ]
+      },
+      "IEEE DySPAN": {
+        "acronym": "DySPAN",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "DySPAN",
+          "IEEE DySPAN",
+          "IEEE International Symposium on Dynamic Spectrum Access Networks"
+        ]
+      },
+      "IEEE SECON": {
+        "acronym": "SECON",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "SECON",
+          "IEEE SECON",
+          "IEEE International Conference on Sensing, Communication and Networking"
+        ]
+      },
+      "MILCOM": {
+        "acronym": "MILCOM",
+        "type": "conference",
+        "tier": "related_comms",
+        "aliases": [
+          "MILCOM",
+          "IEEE MILCOM",
+          "Military Communications Conference"
+        ]
+      },
+      "NeurIPS": {
+        "acronym": "NeurIPS",
+        "type": "conference",
+        "tier": "core_ai",
+        "aliases": [
+          "NeurIPS",
+          "NIPS",
+          "Neural Information Processing Systems"
+        ]
+      },
+      "ICLR": {
+        "acronym": "ICLR",
+        "type": "conference",
+        "tier": "core_ai",
+        "aliases": [
+          "ICLR",
+          "International Conference on Learning Representations"
+        ]
+      },
+      "ICML": {
+        "acronym": "ICML",
+        "type": "conference",
+        "tier": "core_ai",
+        "aliases": [
+          "ICML",
+          "International Conference on Machine Learning"
+        ]
+      },
+      "AAAI": {
+        "acronym": "AAAI",
+        "type": "conference",
+        "tier": "core_ai",
+        "aliases": [
+          "AAAI",
+          "AAAI Conference on Artificial Intelligence",
+          "AAAI Conference"
+        ]
+      }
+    },
+    "noise_tokens": [
+      "submitted",
+      "publication",
+      "proceedings",
+      "ieee",
+      "accepted",
+      "under review",
+      "conference",
+      "journal"
+    ]
+  },
+  "taxonomy": {
+    "topic_tags": {
+      "Reinforcement Learning": [
+        "reinforcement learning",
+        "deep reinforcement learning",
+        "actor critic",
+        "actor-critic",
+        "policy gradient",
+        "q-learning",
+        "markov decision process",
+        "bandit learning"
+      ],
+      "Multi-Agent RL": [
+        "multi-agent reinforcement learning",
+        "multi agent reinforcement learning",
+        "multi-agent rl",
+        "marl",
+        "cooperative reinforcement learning"
+      ],
+      "Wireless Communications": [
+        "wireless",
+        "wireless communication",
+        "wireless network",
+        "radio resource",
+        "physical layer",
+        "wireless channel",
+        "base station",
+        "uplink",
+        "downlink"
+      ],
+      "Network Optimization": [
+        "network optimization",
+        "routing",
+        "network utility",
+        "congestion control",
+        "topology control",
+        "link scheduling"
+      ],
+      "Resource Allocation": [
+        "resource allocation",
+        "power allocation",
+        "spectrum allocation",
+        "bandwidth allocation",
+        "resource management"
+      ],
+      "Scheduling & Control": [
+        "scheduling",
+        "scheduler",
+        "lyapunov optimization",
+        "model predictive control",
+        "feedback control"
+      ],
+      "Edge Intelligence": [
+        "edge intelligence",
+        "edge learning",
+        "mobile edge computing",
+        "edge computing",
+        "edge cloud",
+        "edge ai"
+      ],
+      "Federated Learning": [
+        "federated learning",
+        "federated optimization",
+        "federated averaging",
+        "split learning"
+      ],
+      "Semantic Communications": [
+        "semantic communication",
+        "semantic communications",
+        "task-oriented communication",
+        "task oriented communication"
+      ],
+      "Signal Processing": [
+        "signal processing",
+        "channel estimation",
+        "precoding",
+        "beamforming",
+        "ofdm",
+        "mimo",
+        "massive mimo"
+      ],
+      "Networked Systems": [
+        "networked system",
+        "distributed system",
+        "network orchestration",
+        "network management",
+        "network slicing"
+      ],
+      "IoT Systems": [
+        "internet of things",
+        "iot",
+        "iiot",
+        "sensor network",
+        "wireless sensor network"
+      ]
+    },
+    "method_tags": {
+      "LLM": [
+        "large language model",
+        "large reasoning model",
+        "llm",
+        "gpt",
+        "llama",
+        "qwen",
+        "mistral"
+      ],
+      "Multimodal": [
+        "multimodal",
+        "multi-modal",
+        "vision-language",
+        "vision language",
+        "vlm",
+        "image-text",
+        "video-text"
+      ],
+      "Transformer": [
+        "transformer",
+        "self-attention",
+        "attention mechanism"
+      ],
+      "Graph Neural Network": [
+        "graph neural network",
+        "graph convolution",
+        "graph attention network",
+        "gnn"
+      ],
+      "Diffusion / Generative Model": [
+        "diffusion model",
+        "denoising diffusion",
+        "diffusion policy",
+        "generative model",
+        "flow matching"
+      ],
+      "Foundation Model": [
+        "foundation model",
+        "foundation models",
+        "pretrained model",
+        "pre-trained model"
+      ],
+      "Representation Learning": [
+        "representation learning",
+        "contrastive learning",
+        "metric learning",
+        "embedding learning"
+      ],
+      "Neural Network": [
+        "neural network",
+        "deep learning",
+        "deep neural",
+        "neural architecture"
+      ]
+    },
+    "scenario_tags": {
+      "5G/6G": [
+        "5g",
+        "6g",
+        "b5g"
+      ],
+      "MEC / Edge Cloud": [
+        "mobile edge computing",
+        "mec",
+        "edge cloud",
+        "edge server"
+      ],
+      "IoT / IIoT": [
+        "internet of things",
+        "iot",
+        "iiot",
+        "industrial iot"
+      ],
+      "Vehicular / V2X": [
+        "vehicular",
+        "v2x",
+        "connected vehicle",
+        "intelligent transportation"
+      ],
+      "UAV / Drone Network": [
+        "uav",
+        "drone",
+        "unmanned aerial vehicle",
+        "aerial network"
+      ],
+      "Satellite / NTN": [
+        "satellite",
+        "non-terrestrial network",
+        "non terrestrial network",
+        "ntn",
+        "leo constellation"
+      ],
+      "RIS / MIMO / Beamforming": [
+        "reconfigurable intelligent surface",
+        "ris",
+        "mimo",
+        "massive mimo",
+        "beamforming",
+        "precoding"
+      ]
+    },
+    "negative_rules": {
+      "pure_cv_exclusions": [
+        "text-to-image",
+        "text to image",
+        "text-to-video",
+        "text to video",
+        "image editing",
+        "video generation",
+        "3d scene generation",
+        "novel view synthesis",
+        "gaussian splatting"
+      ],
+      "biomedical_exclusions": [
+        "biomedical",
+        "medical imaging",
+        "clinical",
+        "healthcare"
+      ]
+    }
+  },
+  "filter_policy": {
+    "default_track": "core_rl_comms",
+    "default_sort": "relevance-desc",
+    "primary_categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.NI",
+      "cs.IT",
+      "eess.SP",
+      "eess.SY",
+      "stat.ML"
+    ],
+    "secondary_categories": [
+      "cs.CL",
+      "cs.MM",
+      "cs.CV"
+    ],
+    "comm_categories": [
+      "cs.NI",
+      "cs.IT",
+      "eess.SP",
+      "eess.SY"
+    ],
+    "secondary_network_topics": [
+      "Wireless Communications",
+      "Network Optimization",
+      "Edge Intelligence",
+      "Federated Learning",
+      "Semantic Communications"
+    ],
+    "track_labels": {
+      "core_rl_comms": "RL+通信主线",
+      "secondary_llm_mm_nn": "LLM/多模态/神经网络",
+      "other": "其他"
+    },
+    "status_labels": {
+      "all": "全部",
+      "published": "已发表",
+      "accepted": "已录用",
+      "submitted": "投稿中",
+      "preprint": "预印本",
+      "unknown": "未知"
+    },
+    "venue_tier_labels": {
+      "all": "全部",
+      "core_comms": "通信核心",
+      "related_comms": "通信相关",
+      "core_ai": "AI A类",
+      "other": "其他"
+    }
+  }
+}

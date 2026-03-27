@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyPaperZWJ | RL+通信 与 LLM/多模态论文雷达</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <p class="eyebrow">DailyPaperZWJ</p>
+                <h1>RL+通信主线，兼顾 LLM、多模态与神经网络更新</h1>
+                <p class="hero-summary">按 venue、topic、method、scenario 和发表状态筛选最新论文，默认聚焦高相关的 RL+通信结果。</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-label">总论文数</span>
+                    <strong class="stat-value">11041</strong>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">最后生成</span>
+                    <strong class="stat-value small">2026-03-27 01:50:46 UTC</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container page-shell">
+        <section class="control-panel">
+            <div class="panel-head">
+                <h2>筛选面板</h2>
+                <p>默认只显示 RL+通信主线结果，可切换到次级兴趣轨。</p>
+            </div>
+
+            <div class="filter-grid">
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>月份</h3>
+                    </div>
+                    <div id="monthFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>兴趣轨</h3>
+                    </div>
+                    <div id="trackFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>发表状态</h3>
+                    </div>
+                    <div id="statusFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>Venue 层级</h3>
+                    </div>
+                    <div id="venueTierFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>研究主题</h3>
+                    </div>
+                    <div id="topicFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>方法标签</h3>
+                    </div>
+                    <div id="methodFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>应用场景</h3>
+                    </div>
+                    <div id="scenarioFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>排序</h3>
+                    </div>
+                    <div id="sortFilters" class="filters">
+                        <button class="filter-btn sort-btn active" data-sort="relevance-desc">相关性优先</button>
+                        <button class="filter-btn sort-btn" data-sort="date-desc">最新优先</button>
+                        <button class="filter-btn sort-btn" data-sort="date-asc">最早优先</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="search-row">
+                <input id="searchInput" type="text" placeholder="搜索标题、作者、摘要、venue、标签">
+            </div>
+
+            <div class="result-row">
+                <div id="resultsCount" class="results-count">加载中...</div>
+                <div class="export-controls">
+                    <button id="selectAllBtn" class="ghost-btn">全选当前结果</button>
+                    <button id="clearAllBtn" class="ghost-btn">清空选择</button>
+                    <button id="exportBtn" class="solid-btn">导出 BibTeX (<span id="selectedCount">0</span>)</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="paper-section">
+            <div id="papersContainer" class="paper-list"></div>
+            <div class="load-more-wrap">
+                <button id="loadMoreBtn" class="solid-btn">加载更多</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>数据主源: ArXiv。当前版本已引入结构化 venue、topic、method、scenario 和 relevance score。</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

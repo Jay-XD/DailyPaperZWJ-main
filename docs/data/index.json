@@ -1,0 +1,263 @@
+{
+  "generated_at": "2026-03-27 01:50:46 UTC",
+  "defaults": {
+    "interest_track": "core_rl_comms",
+    "sort": "relevance-desc"
+  },
+  "months": [
+    {
+      "month": "2025-12",
+      "count": 3590,
+      "track_counts": {
+        "core_rl_comms": 437,
+        "secondary_llm_mm_nn": 993,
+        "other": 2160
+      },
+      "status_counts": {
+        "submitted": 159,
+        "accepted": 329,
+        "preprint": 3031,
+        "published": 71
+      }
+    },
+    {
+      "month": "2025-11",
+      "count": 6477,
+      "track_counts": {
+        "core_rl_comms": 739,
+        "secondary_llm_mm_nn": 1840,
+        "other": 3898
+      },
+      "status_counts": {
+        "preprint": 5071,
+        "accepted": 950,
+        "submitted": 311,
+        "published": 145
+      }
+    },
+    {
+      "month": "2025-10",
+      "count": 974,
+      "track_counts": {
+        "core_rl_comms": 126,
+        "secondary_llm_mm_nn": 281,
+        "other": 567
+      },
+      "status_counts": {
+        "submitted": 52,
+        "preprint": 792,
+        "accepted": 110,
+        "published": 20
+      }
+    }
+  ],
+  "filters": {
+    "interest_track": [
+      {
+        "value": "core_rl_comms",
+        "label": "RL+通信主线",
+        "count": 1302
+      },
+      {
+        "value": "secondary_llm_mm_nn",
+        "label": "LLM/多模态/神经网络",
+        "count": 3114
+      },
+      {
+        "value": "other",
+        "label": "其他",
+        "count": 6625
+      }
+    ],
+    "publication_status": [
+      {
+        "value": "published",
+        "label": "已发表",
+        "count": 236
+      },
+      {
+        "value": "accepted",
+        "label": "已录用",
+        "count": 1389
+      },
+      {
+        "value": "submitted",
+        "label": "投稿中",
+        "count": 522
+      },
+      {
+        "value": "preprint",
+        "label": "预印本",
+        "count": 8894
+      },
+      {
+        "value": "unknown",
+        "label": "未知",
+        "count": 0
+      }
+    ],
+    "venue_tier": [
+      {
+        "value": "core_comms",
+        "label": "通信核心",
+        "count": 11
+      },
+      {
+        "value": "related_comms",
+        "label": "通信相关",
+        "count": 8
+      },
+      {
+        "value": "core_ai",
+        "label": "AI A类",
+        "count": 831
+      },
+      {
+        "value": "other",
+        "label": "其他",
+        "count": 10191
+      }
+    ],
+    "topic_tags": [
+      {
+        "value": "Reinforcement Learning",
+        "label": "Reinforcement Learning",
+        "count": 1056
+      },
+      {
+        "value": "Network Optimization",
+        "label": "Network Optimization",
+        "count": 158
+      },
+      {
+        "value": "Scheduling & Control",
+        "label": "Scheduling & Control",
+        "count": 154
+      },
+      {
+        "value": "Federated Learning",
+        "label": "Federated Learning",
+        "count": 125
+      },
+      {
+        "value": "Signal Processing",
+        "label": "Signal Processing",
+        "count": 72
+      },
+      {
+        "value": "Wireless Communications",
+        "label": "Wireless Communications",
+        "count": 69
+      },
+      {
+        "value": "IoT Systems",
+        "label": "IoT Systems",
+        "count": 58
+      },
+      {
+        "value": "Multi-Agent RL",
+        "label": "Multi-Agent RL",
+        "count": 57
+      },
+      {
+        "value": "Edge Intelligence",
+        "label": "Edge Intelligence",
+        "count": 44
+      },
+      {
+        "value": "Resource Allocation",
+        "label": "Resource Allocation",
+        "count": 42
+      },
+      {
+        "value": "Semantic Communications",
+        "label": "Semantic Communications",
+        "count": 11
+      },
+      {
+        "value": "Networked Systems",
+        "label": "Networked Systems",
+        "count": 7
+      }
+    ],
+    "method_tags": [
+      {
+        "value": "LLM",
+        "label": "LLM",
+        "count": 2059
+      },
+      {
+        "value": "Multimodal",
+        "label": "Multimodal",
+        "count": 1924
+      },
+      {
+        "value": "Neural Network",
+        "label": "Neural Network",
+        "count": 1153
+      },
+      {
+        "value": "Transformer",
+        "label": "Transformer",
+        "count": 952
+      },
+      {
+        "value": "Foundation Model",
+        "label": "Foundation Model",
+        "count": 479
+      },
+      {
+        "value": "Diffusion / Generative Model",
+        "label": "Diffusion / Generative Model",
+        "count": 456
+      },
+      {
+        "value": "Representation Learning",
+        "label": "Representation Learning",
+        "count": 313
+      },
+      {
+        "value": "Graph Neural Network",
+        "label": "Graph Neural Network",
+        "count": 130
+      }
+    ],
+    "scenario_tags": [
+      {
+        "value": "UAV / Drone Network",
+        "label": "UAV / Drone Network",
+        "count": 147
+      },
+      {
+        "value": "Satellite / NTN",
+        "label": "Satellite / NTN",
+        "count": 87
+      },
+      {
+        "value": "IoT / IIoT",
+        "label": "IoT / IIoT",
+        "count": 56
+      },
+      {
+        "value": "RIS / MIMO / Beamforming",
+        "label": "RIS / MIMO / Beamforming",
+        "count": 29
+      },
+      {
+        "value": "Vehicular / V2X",
+        "label": "Vehicular / V2X",
+        "count": 27
+      },
+      {
+        "value": "5G/6G",
+        "label": "5G/6G",
+        "count": 20
+      },
+      {
+        "value": "MEC / Edge Cloud",
+        "label": "MEC / Edge Cloud",
+        "count": 12
+      }
+    ]
+  }
+}
