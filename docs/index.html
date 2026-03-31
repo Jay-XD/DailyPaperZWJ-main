@@ -12,16 +12,16 @@
             <div class="hero-copy">
                 <p class="eyebrow">DailyPaperZWJ</p>
                 <h1>RL+通信主线，兼顾 LLM、多模态与神经网络更新</h1>
-                <p class="hero-summary">按 venue、topic、method、scenario 和发表状态筛选最新论文，默认聚焦高相关的 RL+通信结果。</p>
+                <p class="hero-summary">按文献类型、Venue、topic、method、scenario 和发表状态筛选最新论文，默认聚焦高相关的 RL+通信结果。</p>
             </div>
             <div class="hero-stats">
                 <div class="stat-card">
                     <span class="stat-label">总论文数</span>
-                    <strong class="stat-value">11041</strong>
+                    <strong class="stat-value">13151</strong>
                 </div>
                 <div class="stat-card">
                     <span class="stat-label">最后生成</span>
-                    <strong class="stat-value small">2026-03-27 07:50:38 UTC</strong>
+                    <strong class="stat-value small">2026-03-31 10:42:37 UTC</strong>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <section class="control-panel">
             <div class="panel-head">
                 <h2>筛选面板</h2>
-                <p>默认只显示 RL+通信主线结果，可切换到次级兴趣轨。</p>
+                <p>默认只显示 RL+通信主线结果，可切换到次级兴趣轨并按正式 Venue 精筛。</p>
             </div>
 
             <div class="filter-grid">
@@ -54,6 +54,20 @@
                         <h3>发表状态</h3>
                     </div>
                     <div id="statusFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>文献类型</h3>
+                    </div>
+                    <div id="paperTypeFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>Venue</h3>
+                    </div>
+                    <div id="venueFilters" class="filters"></div>
                 </section>
 
                 <section class="filter-group">
@@ -120,7 +134,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>数据主源: ArXiv。当前版本已引入结构化 venue、topic、method、scenario 和 relevance score。</p>
+            <p>数据源: ArXiv、Crossref、DBLP、OpenReview。当前版本已支持正式 Venue 归一化、多源去重，以及文献类型 / Venue 筛选。</p>
         </div>
     </footer>
 
