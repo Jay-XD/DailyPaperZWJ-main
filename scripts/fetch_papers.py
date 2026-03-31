@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
@@ -40,6 +41,11 @@ PROVIDER_PRIORITY = {
     "dblp": 4,
     "crossref": 4,
 }
+
+
+def _is_arxiv_rate_limit_error(exc: Exception) -> bool:
+    message = str(exc).lower()
+    return "http 429" in message or "status_code=429" in message or "too many requests" in message
 
 
 def _is_empty(value: Any) -> bool:
@@ -158,7 +164,16 @@ class PaperFetcher:
 
         max_results = int(arxiv_config.get("max_results", 100))
         days_back = int(arxiv_config.get("days_back", 7))
+        request_retries = int(arxiv_config.get("request_retries", 3))
+        delay_seconds = float(arxiv_config.get("delay_seconds", 3.0))
+        category_retry_attempts = int(arxiv_config.get("category_retry_attempts", 2))
+        rate_limit_backoff_seconds = float(arxiv_config.get("rate_limit_backoff_seconds", 30.0))
         start_date = datetime.now(timezone.utc) - timedelta(days=days_back)
+        client = arxiv.Client(
+            page_size=max_results,
+            delay_seconds=delay_seconds,
+            num_retries=request_retries,
+        )
 
         deduper = PaperDeduper(self._merge_duplicate)
 
@@ -173,21 +188,52 @@ class PaperFetcher:
             )
 
             category_count = 0
-            for result in search.results():
-                paper_date = (result.updated or result.published).astimezone(timezone.utc)
-                if paper_date < start_date:
-                    continue
+            category_completed = False
+            for attempt in range(category_retry_attempts + 1):
+                try:
+                    for result in client.results(search):
+                        paper_date = (result.updated or result.published).astimezone(timezone.utc)
+                        if paper_date < start_date:
+                            continue
 
-                paper = self._result_to_paper(result, category)
-                paper = self.processor.enrich_paper(paper)
+                        paper = self._result_to_paper(result, category)
+                        paper = self.processor.enrich_paper(paper)
 
-                if category in secondary_category_set and not self.processor.should_keep_secondary_category_paper(paper):
-                    continue
+                        if (
+                            category in secondary_category_set
+                            and not self.processor.should_keep_secondary_category_paper(paper)
+                        ):
+                            continue
 
-                deduper.add(paper)
-                category_count += 1
+                        deduper.add(paper)
+                        category_count += 1
 
-            logger.info("Collected %s recent papers from %s", category_count, category)
+                    category_completed = True
+                    break
+                except Exception as exc:
+                    if _is_arxiv_rate_limit_error(exc):
+                        if attempt < category_retry_attempts:
+                            backoff = rate_limit_backoff_seconds * (attempt + 1)
+                            logger.warning(
+                                "ArXiv rate-limited category %s with HTTP 429; retrying in %.1f seconds (%s/%s)",
+                                category,
+                                backoff,
+                                attempt + 1,
+                                category_retry_attempts,
+                            )
+                            time.sleep(backoff)
+                            continue
+
+                        logger.warning(
+                            "ArXiv kept returning HTTP 429 for %s; skipping this category and continuing external sources",
+                            category,
+                        )
+                        break
+
+                    raise
+
+            if category_completed:
+                logger.info("Collected %s recent papers from %s", category_count, category)
 
         papers = deduper.values()
         papers.sort(key=paper_sort_key, reverse=True)

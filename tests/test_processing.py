@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+import types
 import unittest
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -518,6 +519,49 @@ class AdapterTests(unittest.TestCase):
             call_log[2][1]["headers"],
             {"Authorization": "Bearer secret-token"},
         )
+
+    def test_arxiv_rate_limit_is_skipped_without_failing_pipeline(self):
+        config = deepcopy(self.config)
+        config["sources"]["arxiv"] = {
+            "enabled": True,
+            "primary_categories": ["cs.LG"],
+            "secondary_categories": [],
+            "max_results": 10,
+            "days_back": 7,
+            "request_retries": 0,
+            "delay_seconds": 0.0,
+            "category_retry_attempts": 1,
+            "rate_limit_backoff_seconds": 0.0,
+        }
+
+        fetcher = PaperFetcher(str(PROJECT_ROOT / "config.yaml"))
+        fetcher.config = config
+
+        class FakeSearch:
+            def __init__(self, **kwargs):
+                self.kwargs = kwargs
+
+        class FakeClient:
+            def __init__(self, **kwargs):
+                self.calls = 0
+
+            def results(self, search):
+                self.calls += 1
+                raise RuntimeError("Page request resulted in HTTP 429")
+
+        fake_client = FakeClient()
+        fake_arxiv = types.SimpleNamespace(
+            Search=FakeSearch,
+            Client=lambda **kwargs: fake_client,
+            SortCriterion=types.SimpleNamespace(SubmittedDate="submitted"),
+            SortOrder=types.SimpleNamespace(Descending="descending"),
+        )
+
+        with patch.dict(sys.modules, {"arxiv": fake_arxiv}), patch("time.sleep"):
+            papers = fetcher.fetch_arxiv_papers()
+
+        self.assertEqual(papers, [])
+        self.assertEqual(fake_client.calls, 2)
 
 
 class SiteGenerationTests(unittest.TestCase):
