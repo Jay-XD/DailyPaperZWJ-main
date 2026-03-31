@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const monthFilters = document.getElementById("monthFilters");
     const trackFilters = document.getElementById("trackFilters");
     const statusFilters = document.getElementById("statusFilters");
+    const paperTypeFilters = document.getElementById("paperTypeFilters");
+    const venueFilters = document.getElementById("venueFilters");
     const venueTierFilters = document.getElementById("venueTierFilters");
     const topicFilters = document.getElementById("topicFilters");
     const methodFilters = document.getElementById("methodFilters");
@@ -19,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterGroups = [
         { key: "interest_track", container: trackFilters, className: "track" },
         { key: "publication_status", container: statusFilters, className: "status" },
-        { key: "venue_tier", container: venueTierFilters, className: "venue" },
+        { key: "paper_type", container: paperTypeFilters, className: "paper-type" },
+        { key: "venues", container: venueFilters, className: "venue-name" },
+        { key: "venue_tier", container: venueTierFilters, className: "venue-tier" },
         { key: "topic_tags", container: topicFilters, className: "topic" },
         { key: "method_tags", container: methodFilters, className: "method" },
         { key: "scenario_tags", container: scenarioFilters, className: "scenario" },
@@ -32,7 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
         publication_status: {
             all: "全部",
         },
+        paper_type: {
+            all: "全部",
+        },
         venue_tier: {
+            all: "全部",
+        },
+        venues: {
             all: "全部",
         },
     };
@@ -47,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
         month: "all",
         interest_track: "all",
         publication_status: "all",
+        paper_type: "all",
+        venues: "all",
         venue_tier: "all",
         topic_tags: "all",
         method_tags: "all",
@@ -173,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     active: state[group.key] === "all",
                     className: `${group.className} ${state[group.key]}`,
                     onClick: () => setFilter(group.key, "all"),
+                    title: getTitle(group.key, "all"),
                 }),
             ];
 
@@ -190,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         active: state[group.key] === option.value,
                         className: `${group.className} ${option.value}`,
                         onClick: () => setFilter(group.key, option.value),
+                        title: option.title || option.label,
                     })
                 );
             });
@@ -198,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function createFilterButton({ key, value, label, active, className, onClick }) {
+    function createFilterButton({ key, value, label, active, className, onClick, title }) {
         const button = document.createElement("button");
         const keyToken = safeToken(key);
         const valueToken = safeToken(value);
@@ -212,6 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
         button.dataset.key = key;
         button.dataset.value = value;
         button.textContent = label;
+        if (title) {
+            button.title = title;
+        }
         if (active) {
             button.classList.add("active");
         }
@@ -234,6 +251,8 @@ document.addEventListener("DOMContentLoaded", () => {
             for (const key of [
                 "interest_track",
                 "publication_status",
+                "paper_type",
+                "venues",
                 "venue_tier",
                 "topic_tags",
                 "method_tags",
@@ -253,6 +272,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     (paper.authors || []).join(" "),
                     paper.abstract,
                     paper.venue_name,
+                    paper.venue_acronym,
+                    paper.venue_filter_label,
+                    paper.paper_type,
+                    paper.source_provider,
                     (paper.tags || []).join(" "),
                 ]
                     .filter(Boolean)
@@ -272,7 +295,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return true;
         }
 
-        if (key === "interest_track" || key === "publication_status" || key === "venue_tier") {
+        if (key === "venues") {
+            return (paper.venue_filter_value || "") === value;
+        }
+
+        if (key === "interest_track" || key === "publication_status" || key === "paper_type" || key === "venue_tier") {
             return (paper[key] || "other") === value;
         }
 
@@ -297,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderPapers() {
         if (filteredPapers.length === 0) {
-            papersContainer.innerHTML = `<div class="empty-state">当前筛选条件下没有论文。可以尝试切到次级兴趣轨或放宽 topic/method 条件。</div>`;
+            papersContainer.innerHTML = `<div class="empty-state">当前筛选条件下没有论文。可以尝试切到次级兴趣轨或放宽 Venue / 文献类型条件。</div>`;
             loadMoreBtn.disabled = true;
             return;
         }
@@ -332,17 +359,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function createPaperCard(paper) {
-        const paperId = escapeHtml(paper.arxiv_id || paper.id);
-        const arxivUrl = escapeAttribute(paper.arxiv_url || `https://arxiv.org/abs/${paperId}`);
-        const pdfUrl = escapeAttribute(paper.pdf_url || `https://arxiv.org/pdf/${paperId}.pdf`);
+        const paperKey = paper.arxiv_id || paper.doi || paper.id || "paper";
+        const paperId = escapeAttribute(paperKey);
+        const paperUrl = paper.arxiv_url || paper.doi_url || paper.source_url || paper.pdf_url || "#";
+        const pdfUrl = paper.pdf_url ? escapeAttribute(paper.pdf_url) : "";
+        const arxivUrl = paper.arxiv_url ? escapeAttribute(paper.arxiv_url) : "";
+        const doiUrl = paper.doi_url ? escapeAttribute(paper.doi_url) : "";
+        const sourceUrl = paper.source_url ? escapeAttribute(paper.source_url) : "";
         const projectLink = paper.project_link ? `<a class="link-btn" href="${escapeAttribute(paper.project_link)}" target="_blank" rel="noreferrer">Project</a>` : "";
         const codeLink = paper.code_link ? `<a class="link-btn" href="${escapeAttribute(paper.code_link)}" target="_blank" rel="noreferrer">Code</a>` : "";
+        const venueLabel = paper.venue_filter_label || paper.venue_acronym || paper.venue_name || "";
         const venuePill = paper.venue_name
-            ? `<span class="meta-pill venue-${escapeHtml(paper.venue_tier || "other")}">${escapeHtml(paper.venue_name)}</span>`
+            ? `<span class="meta-pill venue-${escapeHtml(paper.venue_tier || "other")}" title="${escapeAttribute(paper.venue_name)}">${escapeHtml(venueLabel)}</span>`
             : "";
         const statusPill = `<span class="meta-pill status-${escapeHtml(paper.publication_status || "unknown")}">${escapeHtml(getLabel("publication_status", paper.publication_status || "unknown"))}</span>`;
+        const paperTypePill = `<span class="meta-pill">${escapeHtml(getLabel("paper_type", paper.paper_type || "other"))}</span>`;
         const scorePill = `<span class="meta-pill">相关性 ${escapeHtml(String(paper.relevance_score || 0))}</span>`;
         const trackPill = `<span class="meta-pill">${escapeHtml(getLabel("interest_track", paper.interest_track || "other"))}</span>`;
+        const sourcePill = `<span class="meta-pill">${escapeHtml((paper.source_provider || "unknown").toUpperCase())}</span>`;
+
+        const linkButtons = [];
+        if (arxivUrl) {
+            linkButtons.push(`<a class="link-btn" href="${arxivUrl}" target="_blank" rel="noreferrer">ArXiv</a>`);
+        }
+        if (pdfUrl) {
+            linkButtons.push(`<a class="link-btn" href="${pdfUrl}" target="_blank" rel="noreferrer">PDF</a>`);
+        }
+        if (doiUrl) {
+            linkButtons.push(`<a class="link-btn" href="${doiUrl}" target="_blank" rel="noreferrer">DOI</a>`);
+        }
+        if (sourceUrl && sourceUrl !== doiUrl && sourceUrl !== arxivUrl) {
+            linkButtons.push(`<a class="link-btn" href="${sourceUrl}" target="_blank" rel="noreferrer">Venue</a>`);
+        }
+        if (projectLink) {
+            linkButtons.push(projectLink);
+        }
+        if (codeLink) {
+            linkButtons.push(codeLink);
+        }
 
         return `
             <article class="paper-card">
@@ -352,18 +406,20 @@ document.addEventListener("DOMContentLoaded", () => {
                             class="paper-checkbox"
                             type="checkbox"
                             data-paper-id="${paperId}"
-                            ${selectedPaperIds.has(paperId) ? "checked" : ""}
+                            ${selectedPaperIds.has(paperKey) ? "checked" : ""}
                         >
                     </label>
                     <div>
                         <h2 class="paper-title">
-                            <a href="${arxivUrl}" target="_blank" rel="noreferrer">${escapeHtml(paper.title || "Untitled")}</a>
+                            <a href="${escapeAttribute(paperUrl)}" target="_blank" rel="noreferrer">${escapeHtml(paper.title || "Untitled")}</a>
                         </h2>
                         <div class="paper-meta">
                             <span class="meta-pill">${escapeHtml(paper.published || "未知日期")}</span>
                             ${statusPill}
+                            ${paperTypePill}
                             ${trackPill}
                             ${scorePill}
+                            ${sourcePill}
                             ${venuePill}
                         </div>
                     </div>
@@ -390,10 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div class="paper-links">
-                    <a class="link-btn" href="${arxivUrl}" target="_blank" rel="noreferrer">ArXiv</a>
-                    <a class="link-btn" href="${pdfUrl}" target="_blank" rel="noreferrer">PDF</a>
-                    ${projectLink}
-                    ${codeLink}
+                    ${linkButtons.join("")}
                 </div>
             </article>
         `;
@@ -422,13 +475,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return found ? found.label : value;
     }
 
+    function getTitle(key, value) {
+        const options = indexMeta?.filters?.[key] || [];
+        const found = options.find((item) => item.value === value);
+        return found ? (found.title || found.label) : value;
+    }
+
     function updateSelectedCount() {
         selectedCount.textContent = String(selectedPaperIds.size);
     }
 
     selectAllBtn.addEventListener("click", () => {
         filteredPapers.forEach((paper) => {
-            selectedPaperIds.add(paper.arxiv_id || paper.id);
+            selectedPaperIds.add(paper.arxiv_id || paper.doi || paper.id);
         });
         renderPapers();
         updateSelectedCount();
@@ -446,21 +505,23 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const selected = allPapers.filter((paper) => selectedPaperIds.has(paper.arxiv_id || paper.id));
+        const selected = allPapers.filter((paper) => selectedPaperIds.has(paper.arxiv_id || paper.doi || paper.id));
         const bibtex = selected.map(toBibtex).join("\n\n");
         downloadFile(bibtex, "daily-paper-selection.bib", "text/plain");
     });
 
     function toBibtex(paper) {
-        const paperId = (paper.arxiv_id || paper.id || "paper").replace(/[^\w]+/g, "_");
+        const paperId = (paper.arxiv_id || paper.doi || paper.id || "paper").replace(/[^\w]+/g, "_");
         const authors = (paper.authors || []).join(" and ");
         const year = (paper.published || "1970").slice(0, 4);
+        const entryType = paper.venue_type === "conference" ? "inproceedings" : "article";
         const venueField = paper.venue_type === "journal" ? "journal" : "booktitle";
         const venueLine = paper.venue_name ? `,\n  ${venueField}={${paper.venue_name}}` : "";
-        return `@article{${paperId},
+        const doiLine = paper.doi ? `,\n  doi={${paper.doi}}` : "";
+        return `@${entryType}{${paperId},
   title={${paper.title}},
   author={${authors}},
-  year={${year}}${venueLine},
+  year={${year}}${venueLine}${doiLine},
   note={interest_track=${paper.interest_track || "other"}; relevance_score=${paper.relevance_score || 0}}
 }`;
     }

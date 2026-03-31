@@ -21,7 +21,13 @@
     },
     "adapters": {
       "crossref": {
-        "enabled": false,
+        "enabled": true,
+        "base_url": "https://api.crossref.org",
+        "days_back": 365,
+        "rows_per_request": 100,
+        "max_pages": 2,
+        "timeout": 30,
+        "mailto": "",
         "venues": [
           "IEEE Journal on Selected Areas in Communications",
           "IEEE Transactions on Wireless Communications",
@@ -34,7 +40,12 @@
         ]
       },
       "dblp": {
-        "enabled": false,
+        "enabled": true,
+        "base_url": "https://dblp.org",
+        "years_back": 2,
+        "rows_per_request": 200,
+        "max_pages": 2,
+        "timeout": 30,
         "venues": [
           "IEEE INFOCOM",
           "IEEE Globecom",
@@ -47,7 +58,20 @@
         ]
       },
       "openreview": {
-        "enabled": false,
+        "enabled": true,
+        "base_url": "https://api2.openreview.net",
+        "years_back": 2,
+        "limit_per_request": 200,
+        "max_pages": 2,
+        "timeout": 30,
+        "token_expires_in": 3600,
+        "submission_invitation_suffix": "/-/Submission",
+        "notes_details": "directReplies",
+        "venue_id_templates": {
+          "ICLR": "ICLR.cc/{year}/Conference",
+          "ICML": "ICML.cc/{year}/Conference",
+          "NeurIPS": "NeurIPS.cc/{year}/Conference"
+        },
         "venues": [
           "ICLR",
           "ICML",
@@ -532,6 +556,13 @@
       "submitted": "投稿中",
       "preprint": "预印本",
       "unknown": "未知"
+    },
+    "paper_type_labels": {
+      "all": "全部",
+      "conference": "会议",
+      "journal": "期刊",
+      "review": "综述",
+      "other": "其他"
     },
     "venue_tier_labels": {
       "all": "全部",

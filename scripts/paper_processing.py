@@ -13,6 +13,7 @@ URL_RE = re.compile(r"https?://\S+", re.IGNORECASE)
 WHITESPACE_RE = re.compile(r"\s+")
 NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
 ARXIV_VERSION_RE = re.compile(r"v\d+$", re.IGNORECASE)
+ARXIV_CATEGORY_RE = re.compile(r"^[a-z]+(?:\.[a-z]+)?\.[A-Z]{1,4}$")
 
 STATUS_PATTERNS = {
     "published": [
@@ -56,6 +57,35 @@ VENUE_FALLBACK_PATTERNS = [
     ),
 ]
 
+REVIEW_KEYWORDS = [
+    "survey",
+    "review",
+    "tutorial",
+    "overview",
+    "literature review",
+    "systematic review",
+]
+REVIEW_EXCLUSION_PATTERNS = [
+    re.compile(r"\bunder\s+review\b", re.IGNORECASE),
+    re.compile(r"\bsubmitted\s+for\s+review\b", re.IGNORECASE),
+    re.compile(r"\bpeer\s+review\b", re.IGNORECASE),
+]
+
+STATUS_PRIORITY = {
+    "unknown": 0,
+    "preprint": 1,
+    "submitted": 2,
+    "accepted": 3,
+    "published": 4,
+}
+
+SOURCE_PROVIDER_LABELS = {
+    "arxiv": "ArXiv",
+    "crossref": "Crossref",
+    "dblp": "DBLP",
+    "openreview": "OpenReview",
+}
+
 
 def _collapse_spaces(text: str) -> str:
     return WHITESPACE_RE.sub(" ", text).strip()
@@ -71,8 +101,12 @@ def compile_phrase_pattern(phrase: str) -> re.Pattern[str]:
     return re.compile(rf"(?<![a-z0-9]){escaped}(?![a-z0-9])", re.IGNORECASE)
 
 
-def sanitize_venue_text(text: str) -> str:
-    cleaned = URL_RE.sub(" ", text or "")
+def sanitize_venue_text(text: str | None) -> str:
+    if text is None:
+        raw_text = ""
+    else:
+        raw_text = str(text)
+    cleaned = URL_RE.sub(" ", raw_text)
     cleaned = re.sub(
         r"\b\d+\s*(?:pages?|figures?|tables?|appendices?)\b",
         " ",
@@ -93,6 +127,15 @@ def normalize_title(title: str | None) -> str:
     return normalize_lookup(title or "")
 
 
+def normalize_doi(doi: str | None) -> str | None:
+    if not doi:
+        return None
+    normalized = doi.strip()
+    normalized = re.sub(r"^https?://(?:dx\.)?doi\.org/", "", normalized, flags=re.IGNORECASE)
+    normalized = normalized.lower()
+    return normalized or None
+
+
 def build_text_blob(paper: Dict[str, Any]) -> str:
     parts = [
         paper.get("title", ""),
@@ -102,6 +145,7 @@ def build_text_blob(paper: Dict[str, Any]) -> str:
         " ".join(paper.get("categories", []) or []),
         paper.get("primary_category", ""),
         paper.get("venue_name", ""),
+        paper.get("venue_acronym", ""),
     ]
     return _collapse_spaces(" ".join(str(part) for part in parts if part))
 
@@ -109,11 +153,21 @@ def build_text_blob(paper: Dict[str, Any]) -> str:
 def extract_first_url(text: str | None, domain: str | None = None) -> Optional[str]:
     if not text:
         return None
-    for match in URL_RE.findall(text):
+    for match in URL_RE.findall(str(text)):
         if domain and domain.lower() not in match.lower():
             continue
         return match.rstrip(".,;)")
     return None
+
+
+def pick_better_status(left: str | None, right: str | None) -> str | None:
+    left_normalized = normalize_lookup(left or "")
+    right_normalized = normalize_lookup(right or "")
+    left_status = left_normalized if left_normalized in STATUS_PRIORITY else "unknown"
+    right_status = right_normalized if right_normalized in STATUS_PRIORITY else "unknown"
+    if STATUS_PRIORITY[right_status] > STATUS_PRIORITY[left_status]:
+        return right_status
+    return left_status if left_status != "unknown" else right_status
 
 
 @dataclass(frozen=True)
@@ -156,6 +210,19 @@ class VenueRegistry:
 
         self.alias_patterns.sort(key=lambda item: item[0], reverse=True)
 
+    def normalize(
+        self,
+        venue_name: str | None = None,
+        venue_acronym: str | None = None,
+        venue_text: str | None = None,
+    ) -> Dict[str, Optional[str]]:
+        candidates = [
+            sanitize_venue_text(venue_name),
+            sanitize_venue_text(venue_acronym),
+            sanitize_venue_text(venue_text),
+        ]
+        return self._match_candidates(candidates, matched_from="explicit")
+
     def match(self, journal_ref: str | None, comment: str | None) -> Dict[str, Optional[str]]:
         candidates = []
         if journal_ref:
@@ -164,22 +231,13 @@ class VenueRegistry:
             candidates.append(("comment", sanitize_venue_text(comment)))
 
         for source_name, text in candidates:
-            for _, pattern, entry in self.alias_patterns:
-                if pattern.search(normalize_lookup(text)):
-                    return {
-                        "venue_name": entry.canonical_name,
-                        "venue_acronym": entry.acronym,
-                        "venue_type": entry.venue_type,
-                        "venue_tier": entry.tier,
-                        "matched_from": source_name,
-                    }
+            matched = self._match_candidates([text], matched_from=source_name)
+            if matched["venue_name"]:
+                return matched
 
-        for source_name, text in candidates:
-            fallback = self._fallback_match(text)
-            if fallback:
-                fallback["matched_from"] = source_name
-                return fallback
+        return self.empty_match()
 
+    def empty_match(self) -> Dict[str, Optional[str]]:
         return {
             "venue_name": None,
             "venue_acronym": None,
@@ -187,6 +245,33 @@ class VenueRegistry:
             "venue_tier": None,
             "matched_from": None,
         }
+
+    def _match_candidates(
+        self,
+        candidates: Iterable[str],
+        matched_from: str,
+    ) -> Dict[str, Optional[str]]:
+        sanitized = [candidate for candidate in candidates if candidate]
+
+        for text in sanitized:
+            normalized_text = normalize_lookup(text)
+            for _, pattern, entry in self.alias_patterns:
+                if pattern.search(normalized_text):
+                    return {
+                        "venue_name": entry.canonical_name,
+                        "venue_acronym": entry.acronym,
+                        "venue_type": entry.venue_type,
+                        "venue_tier": entry.tier,
+                        "matched_from": matched_from,
+                    }
+
+        for text in sanitized:
+            fallback = self._fallback_match(text)
+            if fallback:
+                fallback["matched_from"] = matched_from
+                return fallback
+
+        return self.empty_match()
 
     def _fallback_match(self, text: str) -> Optional[Dict[str, Optional[str]]]:
         normalized = normalize_lookup(text)
@@ -282,6 +367,7 @@ class PaperProcessor:
         self.rl_topics = {"Reinforcement Learning", "Multi-Agent RL"}
         self.ai_anchor_tiers = {"core_ai"}
         self.comm_tiers = {"core_comms", "related_comms"}
+        self.review_patterns = [compile_phrase_pattern(keyword) for keyword in REVIEW_KEYWORDS]
 
     def enrich_paper(self, paper: Dict[str, Any]) -> Dict[str, Any]:
         enriched = dict(paper)
@@ -289,15 +375,30 @@ class PaperProcessor:
         enriched["categories"] = sorted(
             dict.fromkeys(enriched.get("categories", []) or [])
         )
-        enriched["arxiv_id"] = strip_arxiv_version(enriched.get("id"))
+        enriched["source_provider"] = self._normalize_source_provider(
+            enriched.get("source_provider"),
+            enriched.get("source"),
+        )
+        enriched["source"] = enriched.get("source") or SOURCE_PROVIDER_LABELS.get(
+            enriched["source_provider"],
+            "Unknown",
+        )
+        enriched["doi"] = normalize_doi(enriched.get("doi"))
+        enriched["arxiv_id"] = strip_arxiv_version(
+            enriched.get("arxiv_id") or enriched.get("id")
+        )
         enriched["normalized_title"] = normalize_title(enriched.get("title"))
 
-        venue_meta = self.registry.match(
+        explicit_venue = self._normalize_explicit_venue(enriched)
+        parsed_venue = self.registry.match(
             enriched.get("journal_ref"),
             enriched.get("comment"),
         )
+        venue_meta = explicit_venue if explicit_venue["venue_name"] else parsed_venue
         enriched.update(venue_meta)
-        enriched["publication_status"] = self._infer_status(
+        enriched["publication_status"] = self._normalize_status(
+            enriched.get("publication_status")
+        ) or self._infer_status(
             enriched.get("journal_ref"),
             enriched.get("comment"),
             has_venue=bool(enriched.get("venue_name")),
@@ -328,20 +429,33 @@ class PaperProcessor:
         enriched["relevance_score"] = relevance_score
         enriched["match_reasons"] = match_reasons
         enriched["tags"] = list(dict.fromkeys(topic_tags + method_tags + scenario_tags))
+        enriched["paper_type"] = self._infer_paper_type(
+            text_blob,
+            enriched.get("venue_type"),
+        )
+        self._populate_venue_filter_fields(enriched)
 
         enriched["code_link"] = (
             extract_first_url(enriched.get("comment"), "github.com")
             or extract_first_url(enriched.get("abstract"), "github.com")
+            or enriched.get("code_link")
         )
         enriched["project_link"] = (
             extract_first_url(enriched.get("comment"))
             or extract_first_url(enriched.get("abstract"))
+            or enriched.get("project_link")
         )
+        if enriched.get("doi") and not enriched.get("doi_url"):
+            enriched["doi_url"] = f"https://doi.org/{enriched['doi']}"
+        if not enriched.get("source_url"):
+            enriched["source_url"] = enriched.get("doi_url") or enriched.get("arxiv_url")
 
         if not enriched.get("arxiv_url") and enriched.get("arxiv_id"):
             enriched["arxiv_url"] = f"https://arxiv.org/abs/{enriched['arxiv_id']}"
         if not enriched.get("pdf_url") and enriched.get("arxiv_id"):
             enriched["pdf_url"] = f"https://arxiv.org/pdf/{enriched['arxiv_id']}.pdf"
+        if not enriched.get("updated") and enriched.get("published"):
+            enriched["updated"] = enriched["published"]
 
         return enriched
 
@@ -358,6 +472,67 @@ class PaperProcessor:
                 return [part.strip() for part in authors.split(",") if part.strip()]
             return [authors.strip()]
         return [str(author).strip() for author in authors if str(author).strip()]
+
+    def _normalize_source_provider(
+        self,
+        source_provider: str | None,
+        source: str | None,
+    ) -> str:
+        if source_provider:
+            normalized = normalize_lookup(source_provider)
+            if normalized in SOURCE_PROVIDER_LABELS:
+                return normalized
+        source_normalized = normalize_lookup(source or "")
+        if "crossref" in source_normalized:
+            return "crossref"
+        if "dblp" in source_normalized:
+            return "dblp"
+        if "openreview" in source_normalized:
+            return "openreview"
+        return "arxiv" if "arxiv" in source_normalized or source_normalized else "arxiv"
+
+    def _normalize_explicit_venue(self, paper: Dict[str, Any]) -> Dict[str, Optional[str]]:
+        raw_venue_text = paper.get("venue")
+        if raw_venue_text in (paper.get("primary_category"), paper.get("source_category")):
+            raw_venue_text = None
+        if raw_venue_text and raw_venue_text in set(paper.get("categories", []) or []):
+            raw_venue_text = None
+        if raw_venue_text and ARXIV_CATEGORY_RE.match(str(raw_venue_text)):
+            raw_venue_text = None
+
+        explicit_venue = self.registry.normalize(
+            venue_name=paper.get("venue_name") or paper.get("conference"),
+            venue_acronym=paper.get("venue_acronym"),
+            venue_text=raw_venue_text,
+        )
+        if explicit_venue["venue_name"]:
+            return explicit_venue
+
+        raw_name = sanitize_venue_text(
+            paper.get("venue_name")
+            or paper.get("conference")
+            or paper.get("venue_acronym")
+            or raw_venue_text
+        )
+        raw_acronym = sanitize_venue_text(paper.get("venue_acronym")) or raw_name
+        if not raw_name:
+            return self.registry.empty_match()
+
+        return {
+            "venue_name": raw_name,
+            "venue_acronym": raw_acronym,
+            "venue_type": paper.get("venue_type"),
+            "venue_tier": paper.get("venue_tier") or "other",
+            "matched_from": "explicit",
+        }
+
+    def _normalize_status(self, status: str | None) -> str | None:
+        normalized = normalize_lookup(status or "")
+        if normalized in STATUS_PRIORITY:
+            return normalized
+        if normalized in {"in press", "to appear"}:
+            return "accepted"
+        return None
 
     def _infer_status(
         self,
@@ -378,6 +553,31 @@ class PaperProcessor:
         if has_venue:
             return "accepted"
         return "preprint"
+
+    def _infer_paper_type(self, text_blob: str, venue_type: str | None) -> str:
+        normalized = normalize_lookup(text_blob)
+        if normalized and not any(
+            pattern.search(normalized) for pattern in REVIEW_EXCLUSION_PATTERNS
+        ):
+            if any(pattern.search(normalized) for pattern in self.review_patterns):
+                return "review"
+        if venue_type == "journal":
+            return "journal"
+        if venue_type == "conference":
+            return "conference"
+        return "other"
+
+    def _populate_venue_filter_fields(self, paper: Dict[str, Any]) -> None:
+        venue_name = paper.get("venue_name")
+        venue_acronym = paper.get("venue_acronym")
+        if not venue_name:
+            paper["venue_filter_value"] = None
+            paper["venue_filter_label"] = None
+            return
+
+        label = venue_acronym or venue_name
+        paper["venue_filter_value"] = label
+        paper["venue_filter_label"] = label
 
     def _score_and_track(
         self,

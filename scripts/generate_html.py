@@ -91,16 +91,21 @@ class HTMLGenerator:
         logger.info("Generated metadata index: %s", data_dir / "index.json")
 
     def _build_filter_metadata(self) -> Dict[str, List[Dict[str, Any]]]:
-        track_labels = self.config["filter_policy"]["track_labels"]
-        status_labels = self.config["filter_policy"]["status_labels"]
-        venue_tier_labels = self.config["filter_policy"]["venue_tier_labels"]
+        filter_policy = self.config["filter_policy"]
+        track_labels = filter_policy["track_labels"]
+        status_labels = filter_policy["status_labels"]
+        paper_type_labels = filter_policy["paper_type_labels"]
+        venue_tier_labels = filter_policy["venue_tier_labels"]
 
         topic_counts = Counter()
         method_counts = Counter()
         scenario_counts = Counter()
         track_counts = Counter()
         status_counts = Counter()
+        paper_type_counts = Counter()
         venue_tier_counts = Counter()
+        venue_counts = Counter()
+        venue_meta: Dict[str, Dict[str, str]] = {}
 
         for paper in self.papers:
             topic_counts.update(paper.get("topic_tags", []))
@@ -108,7 +113,19 @@ class HTMLGenerator:
             scenario_counts.update(paper.get("scenario_tags", []))
             track_counts.update([paper.get("interest_track", "other")])
             status_counts.update([paper.get("publication_status", "unknown")])
+            paper_type_counts.update([paper.get("paper_type", "other")])
             venue_tier_counts.update([paper.get("venue_tier") or "other"])
+
+            venue_value = paper.get("venue_filter_value")
+            if venue_value:
+                venue_counts.update([venue_value])
+                venue_meta.setdefault(
+                    venue_value,
+                    {
+                        "label": paper.get("venue_filter_label") or venue_value,
+                        "title": paper.get("venue_name") or venue_value,
+                    },
+                )
 
         return {
             "interest_track": [
@@ -120,15 +137,60 @@ class HTMLGenerator:
                 for value, label in status_labels.items()
                 if value != "all"
             ],
+            "paper_type": [
+                {"value": value, "label": label, "count": paper_type_counts.get(value, 0)}
+                for value, label in paper_type_labels.items()
+                if value != "all"
+            ],
             "venue_tier": [
                 {"value": value, "label": label, "count": venue_tier_counts.get(value, 0)}
                 for value, label in venue_tier_labels.items()
                 if value != "all"
             ],
+            "venues": self._build_venue_items(venue_counts, venue_meta),
             "topic_tags": self._facet_items(topic_counts),
             "method_tags": self._facet_items(method_counts),
             "scenario_tags": self._facet_items(scenario_counts),
         }
+
+    def _build_venue_items(
+        self,
+        venue_counts: Counter,
+        venue_meta: Dict[str, Dict[str, str]],
+    ) -> List[Dict[str, Any]]:
+        items: List[Dict[str, Any]] = []
+        seen = set()
+
+        registry_entries = self.config.get("venue_registry", {}).get("entries", {})
+        for canonical_name, entry in registry_entries.items():
+            value = entry.get("acronym") or canonical_name
+            if value in seen or venue_counts.get(value, 0) == 0:
+                continue
+            items.append(
+                {
+                    "value": value,
+                    "label": value,
+                    "count": venue_counts.get(value, 0),
+                    "title": canonical_name,
+                }
+            )
+            seen.add(value)
+
+        dynamic_items = sorted(
+            (
+                {
+                    "value": value,
+                    "label": meta["label"],
+                    "count": venue_counts.get(value, 0),
+                    "title": meta["title"],
+                }
+                for value, meta in venue_meta.items()
+                if value not in seen
+            ),
+            key=lambda item: (-item["count"], item["label"]),
+        )
+        items.extend(dynamic_items)
+        return items
 
     @staticmethod
     def _facet_items(counter: Counter) -> List[Dict[str, Any]]:
@@ -154,7 +216,7 @@ class HTMLGenerator:
             <div class="hero-copy">
                 <p class="eyebrow">DailyPaperZWJ</p>
                 <h1>RL+通信主线，兼顾 LLM、多模态与神经网络更新</h1>
-                <p class="hero-summary">按 venue、topic、method、scenario 和发表状态筛选最新论文，默认聚焦高相关的 RL+通信结果。</p>
+                <p class="hero-summary">按文献类型、Venue、topic、method、scenario 和发表状态筛选最新论文，默认聚焦高相关的 RL+通信结果。</p>
             </div>
             <div class="hero-stats">
                 <div class="stat-card">
@@ -173,7 +235,7 @@ class HTMLGenerator:
         <section class="control-panel">
             <div class="panel-head">
                 <h2>筛选面板</h2>
-                <p>默认只显示 RL+通信主线结果，可切换到次级兴趣轨。</p>
+                <p>默认只显示 RL+通信主线结果，可切换到次级兴趣轨并按正式 Venue 精筛。</p>
             </div>
 
             <div class="filter-grid">
@@ -196,6 +258,20 @@ class HTMLGenerator:
                         <h3>发表状态</h3>
                     </div>
                     <div id="statusFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>文献类型</h3>
+                    </div>
+                    <div id="paperTypeFilters" class="filters"></div>
+                </section>
+
+                <section class="filter-group">
+                    <div class="filter-title-row">
+                        <h3>Venue</h3>
+                    </div>
+                    <div id="venueFilters" class="filters"></div>
                 </section>
 
                 <section class="filter-group">
@@ -262,7 +338,7 @@ class HTMLGenerator:
 
     <footer class="site-footer">
         <div class="container">
-            <p>数据主源: ArXiv。当前版本已引入结构化 venue、topic、method、scenario 和 relevance score。</p>
+            <p>数据源: ArXiv、Crossref、DBLP、OpenReview。当前版本已支持正式 Venue 归一化、多源去重，以及文献类型 / Venue 筛选。</p>
         </div>
     </footer>
 
