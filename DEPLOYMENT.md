@@ -1,126 +1,133 @@
-# 🚀 部署到 GitHub Pages 指南
+# GitHub Pages Deployment
 
-## 步骤 1：初始化 Git 仓库（本地）
+## 目标
 
-在项目目录下运行：
+这个项目的正式网页形态是 GitHub Pages 上的静态站点。
 
-```powershell
-# 初始化 Git 仓库
+本地项目负责：
+
+- 抓取论文
+- 重建结构化数据
+- 生成 `docs/` 静态站点
+
+GitHub Pages 负责：
+
+- 对外托管 `docs/`
+- 在本地项目和 Python 进程关闭后继续提供网页访问
+
+因此，只要最新的 `docs/` 已经发布到 GitHub Pages，网页就不依赖本地项目是否仍在运行。
+
+## 1. 创建并推送仓库
+
+```bash
 git init
-
-# 添加所有文件
 git add .
-
-# 提交
-git commit -m "Initial commit: DailyPaper project"
-```
-
-## 步骤 2：创建 GitHub 仓库
-
-1. 访问 https://github.com/new
-2. 填写仓库信息：
-   - **Repository name**: `DailyPaper` (或其他你喜欢的名字)
-   - **Description**: `📚 每日自动更新 AI/ML/CV/NLP 领域最新论文`
-   - **Public** (必须是 Public 才能使用免费的 GitHub Pages)
-   - **不要** 勾选 "Add a README file"（我们已经有了）
-3. 点击 **Create repository**
-
-## 步骤 3：连接到 GitHub 并推送
-
-复制 GitHub 上显示的命令，类似这样（替换成你的用户名）：
-
-```powershell
-# 添加远程仓库
-git remote add origin https://github.com/4everWZ/DailyPaper.git
-
-# 重命名分支为 main
+git commit -m "Initial commit"
 git branch -M main
-
-# 推送到 GitHub
+git remote add origin <your-repo-url>
 git push -u origin main
 ```
 
-## 步骤 4：配置 GitHub Pages
+## 2. 配置 GitHub Pages
 
-1. 进入你的 GitHub 仓库页面
-2. 点击 **Settings** (设置)
-3. 在左侧菜单找到 **Pages**
-4. 在 "Build and deployment" 下：
-   - **Source**: 选择 `Deploy from a branch`
-   - **Branch**: 选择 `gh-pages` 和 `/ (root)`
-   - 点击 **Save**
+1. 进入仓库 `Settings`
+2. 打开 `Pages`
+3. 在 `Build and deployment` 中选择 `Deploy from a branch`
+4. 选择 `gh-pages` 分支和 `/ (root)`
 
-## 步骤 5：配置 GitHub Actions 权限
+## 3. 配置 GitHub Actions 权限
 
-1. 在 Settings 中，点击左侧的 **Actions** > **General**
-2. 滚动到 **Workflow permissions**
-3. 选择 **Read and write permissions**
-4. 勾选 **Allow GitHub Actions to create and approve pull requests**
-5. 点击 **Save**
+1. 打开 `Settings > Actions > General`
+2. 在 `Workflow permissions` 中选择 `Read and write permissions`
+3. 勾选 `Allow GitHub Actions to create and approve pull requests`
 
-## 步骤 6：触发首次自动更新
+## 4. 工作流行为
 
-方法 1：手动触发
-1. 在 GitHub 仓库页面，点击 **Actions** 标签
-2. 在左侧选择 **Update Papers Daily** workflow
-3. 点击右侧的 **Run workflow** 按钮
-4. 点击绿色的 **Run workflow** 确认
+仓库中的 [`.github/workflows/update-papers.yml`](.github/workflows/update-papers.yml) 会在 GitHub Actions 中：
 
-方法 2：修改文件触发
-```powershell
-# 随便修改一个文件，比如 README.md，然后提交
+1. 检出仓库
+2. 按 [`environment.yml`](environment.yml) 创建 `dailypaper` Conda 环境
+3. 验证核心依赖
+4. 运行 `scripts/fetch_papers.py`
+5. 运行 `scripts/reindex_papers.py`
+6. 运行 `scripts/generate_html.py`
+7. 将新的数据文件提交回主分支
+8. 将 `docs/` 发布到 `gh-pages`
+
+## 5. 首次触发
+
+### 方法一：手动触发
+
+1. 打开仓库 `Actions`
+2. 选择 `Update Papers Daily`
+3. 点击 `Run workflow`
+
+### 方法二：提交触发
+
+```bash
 git add .
-git commit -m "Trigger GitHub Actions"
+git commit -m "Trigger workflow"
 git push
 ```
 
-## 步骤 7：等待部署完成
+## 6. 验证发布结果
 
-1. 在 **Actions** 标签中查看运行状态
-2. 等待绿色的 ✓ 出现（通常需要 1-3 分钟）
-3. 访问你的网站：`https://4everWZ.github.io/DailyPaper/`
+1. 在 `Actions` 中确认 workflow 成功
+2. 等待 GitHub Pages 完成更新
+3. 访问：
 
-## 🎉 完成！
-
-现在你的论文汇总工具将：
-- ✅ 每天 UTC 0:00 自动运行
-- ✅ 自动抓取最新论文
-- ✅ 自动更新网站
-
-## 📝 后续维护
-
-### 修改配置
-编辑 `config.yaml` 后提交推送：
-```powershell
-git add config.yaml
-git commit -m "Update config"
-git push
+```text
+https://<your-github-username>.github.io/<repo-name>/
 ```
 
-### 手动触发更新
-在 GitHub Actions 页面点击 "Run workflow"
+## 本地预览与线上访问的差异
 
-### 查看网站
-访问：`https://4everWZ.github.io/DailyPaper/`
+### 本地预览
 
-## ⚠️ 常见问题
+本地要先生成 `docs/`，再启动静态文件服务：
 
-### 问题 1：Actions 运行失败
-- 检查 Settings > Actions > General 中的权限设置
-- 查看 Actions 日志了解具体错误
+```bash
+conda run -n dailypaper python -m http.server 8000 --directory docs
+```
 
-### 问题 2：网站显示 404
-- 确保已在 Settings > Pages 中配置了 `gh-pages` 分支
-- 等待 3-5 分钟让 GitHub Pages 完成部署
-- 检查 Actions 是否成功创建了 `gh-pages` 分支
+特点：
 
-### 问题 3：网站没有更新
-- 检查 Actions 运行日志
-- 清除浏览器缓存
-- 等待几分钟（GitHub Pages 有缓存延迟）
+- 可以立即看到最新生成结果
+- 依赖本地环境
+- 关闭本地服务后页面不可访问
 
-## 🎯 自定义域名（可选）
+### GitHub Pages
 
-如果你有自己的域名：
-1. 在 Settings > Pages > Custom domain 中输入域名
-2. 在你的域名提供商处添加 CNAME 记录指向 `你的用户名.github.io`
+特点：
+
+- 页面持续可访问
+- 不依赖本地项目是否开启
+- 看到的是最近一次生成并发布后的静态快照
+
+## 不推荐的方式
+
+不要把“直接双击 `docs/index.html`”当作正式使用方式。
+
+原因是前端会通过 `fetch("data/*.json")` 加载数据，很多浏览器在 `file://` 模式下会限制这类请求，导致页面空白或筛选失效。
+
+## 常见问题
+
+### Actions 里环境创建失败
+
+- 检查 `environment.yml` 语法
+- 检查 GitHub Actions 日志中是否有依赖解析失败
+
+### Pages 打开后是 404
+
+- 确认 `Pages` 配置的是 `gh-pages`
+- 确认 workflow 已成功运行一次
+
+### 页面打开但没有数据
+
+- 检查 `docs/data/index.json` 是否已生成
+- 检查浏览器开发者工具里对 `data/*.json` 的请求是否成功
+
+### 本地双击 HTML 无法使用
+
+- 这是预期行为，不是主支持路径
+- 请改用本地静态服务器或 GitHub Pages

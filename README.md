@@ -1,125 +1,142 @@
-# DailyPaper - 自动文献汇总工具
+# DailyPaperZWJ
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-每天自动汇总 AI/ML/CV/NLP 领域的最新论文，节省你的检索时间！
+DailyPaperZWJ 是一个面向 RL+通信主线、兼顾 LLM/多模态/神经网络更新的论文雷达。项目会抓取论文、重建结构化标签与 venue 信息，并生成可部署到 GitHub Pages 的静态网站。
 
-## 🎯 功能特点
+## 功能概览
 
-- ✨ **自动更新**：每天自动抓取最新论文
-- 📚 **多源聚合**：支持 ArXiv、顶级会议、期刊等多个数据源
-- 🔍 **智能分类**：按领域自动分类（CV、NLP、ML 等）
-- 🎨 **美观展示**：响应式网页设计，支持搜索和筛选
-- 🔗 **快速访问**：论文原文直接链接
+- 自动抓取和增量整理论文数据
+- 按 venue、topic、method、scenario、发表状态进行结构化标注
+- 生成 `docs/` 静态网站，支持筛选、搜索和 BibTeX 导出
+- 支持 GitHub Pages 托管，网页与本地 Python 进程解耦
 
-## 📖 支持的数据源
+## 运行环境
 
-- **ArXiv**：cs.AI, cs.CV, cs.CL, cs.LG 等分类
-- **会议**：NeurIPS, ICML, CVPR, ICCV, ECCV, ACL, EMNLP 等
-- **期刊**：Nature, Science, PAMI, JMLR 等
+项目默认使用 Conda 管理环境，环境定义见 [`environment.yml`](environment.yml)。
 
-## 🚀 快速开始
-
-### 本地运行
+### 创建环境
 
 ```bash
-# 克隆项目
-git clone https://github.com/4everWZ/DailyPaper.git
-cd DailyPaper
+conda env create -f environment.yml
+conda activate dailypaper
+```
 
-# 安装依赖
-pip install -r requirements.txt
+### 验证依赖
 
-# 运行爬虫
+```bash
+python -c "import yaml, arxiv, requests"
+```
+
+### 常用命令
+
+```bash
+# 抓取论文
 python scripts/fetch_papers.py
 
-# 生成网页
+# 重建已有数据的结构化标签和 venue
+python scripts/reindex_papers.py
+
+# 生成静态网页
 python scripts/generate_html.py
+
+# 运行测试
+python -m unittest discover -s tests -v
 ```
 
-### 部署到 GitHub Pages
+### 一键脚本
 
-**快速部署（推荐）：**
-```powershell
-# 运行一键部署脚本
-.\deploy.ps1
+Linux/macOS 可直接运行：
+
+```bash
+./quickstart.sh
 ```
 
-**手动部署：**
-1. 在 GitHub 创建新仓库（名为 `DailyPaper`，Public）
-2. 将代码推送到 GitHub
-3. 在 Settings > Pages 中配置：Source = `gh-pages` 分支
-4. 在 Settings > Actions > General 中配置权限：Read and write
-5. 在 Actions 中手动运行 "Update Papers Daily"
-6. 访问 `https://4everWZ.github.io/DailyPaper/`
+脚本会：
 
-**详细步骤请查看：[DEPLOYMENT.md](DEPLOYMENT.md)**
+- 检查 Conda 是否可用
+- 创建或复用 `dailypaper` 环境
+- 验证核心依赖
+- 运行测试
+- 重建数据
+- 生成静态站点
 
-## 📁 项目结构
+## 网页如何使用
 
+### 本地预览
+
+生成 `docs/` 后，用静态文件服务器预览：
+
+```bash
+conda run -n dailypaper python -m http.server 8000 --directory docs
 ```
-DailyPaper/
-├── .github/
-│   └── workflows/
-│       └── update-papers.yml    # GitHub Actions 自动化脚本
+
+然后访问 `http://127.0.0.1:8000`。
+
+### 正式使用
+
+正式访问方式是把 `docs/` 发布到 GitHub Pages。发布完成后，网页访问不依赖本地项目是否还在运行。
+
+这意味着：
+
+- 本地 Python 进程关闭后，GitHub Pages 上的网页仍然可访问
+- 网页内容是最近一次生成并发布后的静态快照
+- 本地重新抓取或重建后，需要再次发布，线上页面才会更新
+
+### 关于直接双击 `docs/index.html`
+
+这不是正式支持方式。当前前端会在浏览器里请求 `docs/data/*.json`，很多浏览器在 `file://` 场景下会拦截这类请求或行为不一致，因此不保证直接双击本地 HTML 可以正常工作。
+
+## 项目结构
+
+```text
+DailyPaperZWJ/
+├── .github/workflows/update-papers.yml
+├── environment.yml
+├── config.yaml
+├── data/papers.json
+├── docs/
 ├── scripts/
-│   ├── fetch_papers.py          # 论文抓取脚本
-│   ├── generate_html.py         # 生成静态页面
-│   └── utils.py                 # 工具函数
-├── data/
-│   └── papers.json              # 论文数据存储
-├── docs/                        # GitHub Pages 源文件
-│   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── main.js
-├── requirements.txt
+│   ├── fetch_papers.py
+│   ├── reindex_papers.py
+│   ├── generate_html.py
+│   └── paper_processing.py
+├── tests/
 └── README.md
 ```
 
-## ⚙️ 配置
+## GitHub Pages 部署
 
-编辑 `config.yaml` 文件来自定义：
+仓库已提供 GitHub Actions 工作流 [`update-papers.yml`](.github/workflows/update-papers.yml)，会在 GitHub Actions 中：
 
-```yaml
-# 抓取配置
-sources:
-  arxiv:
-    enabled: true
-    categories: ['cs.AI', 'cs.CV', 'cs.CL', 'cs.LG']
-    max_results: 50
-  
-# 更新频率
-schedule: "0 0 * * *"  # 每天 UTC 0:00
+- 依据 `environment.yml` 创建 Conda 环境
+- 抓取论文
+- 重建结构化数据
+- 生成静态网页
+- 发布 `docs/` 到 `gh-pages`
 
-# 领域关键词
-keywords:
-  CV: ['computer vision', 'image', 'video', 'detection', 'segmentation']
-  NLP: ['natural language', 'language model', 'transformer', 'nlp']
-  ML: ['machine learning', 'deep learning', 'neural network']
-```
+详细步骤见 [`DEPLOYMENT.md`](DEPLOYMENT.md)。
 
-## 📊 数据来源
+## 使用差异
 
-- [ArXiv](https://arxiv.org/) - 开放获取的预印本论文库
+### GitHub Pages 模式
 
-## 🤝 贡献
+- 访问稳定
+- 不需要本地环境持续运行
+- 内容只在下一次生成并发布后更新
 
-欢迎提交 Issue 和 Pull Request！
+### 本地预览模式
 
-## 📄 许可证
+- 可以立刻看到最新生成结果
+- 需要本地 Conda 环境和静态文件服务器
+
+### 直接打开本地 HTML
+
+- 不作为支持模式
+- 因 `fetch` 读取 JSON 的浏览器限制，兼容性不可靠
+
+## 许可证
 
 MIT License
-
-## 🙏 致谢
-
-感谢所有开源数据源提供者和贡献者！
-
-## ⭐ Star History
-
-如果这个项目对你有帮助，请给个 Star ⭐️
-
-项目来源于xx.
