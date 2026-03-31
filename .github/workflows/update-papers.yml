@@ -1,9 +1,8 @@
 name: Update Papers Daily
 
 on:
-  # Enable when you want scheduled refreshes.
-  # schedule:
-  #   - cron: "0 0 * * *"
+  schedule:
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 jobs:
@@ -37,6 +36,10 @@ jobs:
 
       - name: Fetch papers
         shell: bash -el {0}
+        env:
+          OPENREVIEW_ACCESS_TOKEN: ${{ secrets.OPENREVIEW_ACCESS_TOKEN }}
+          OPENREVIEW_USERNAME: ${{ secrets.OPENREVIEW_USERNAME }}
+          OPENREVIEW_PASSWORD: ${{ secrets.OPENREVIEW_PASSWORD }}
         run: |
           python scripts/fetch_papers.py
 

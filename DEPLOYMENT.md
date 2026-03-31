@@ -32,8 +32,16 @@ git push -u origin main
 
 1. 进入仓库 `Settings`
 2. 打开 `Pages`
-3. 在 `Build and deployment` 中选择 `Deploy from a branch`
-4. 选择 `gh-pages` 分支和 `/ (root)`
+3. 当前先不要急着选 `main`
+4. 先到 `Actions` 手动运行一次 `Update Papers Daily`
+5. 等 workflow 成功后，它会按 [`.github/workflows/update-papers.yml`](.github/workflows/update-papers.yml) 自动创建 `gh-pages`
+6. 再回到 `Pages`
+7. 在 `Build and deployment` 中选择 `Deploy from a branch`
+8. 选择 `gh-pages` 分支和 `/ (root)`
+
+不要选择 `main` 和 `/ (root)`。
+
+原因是当前站点首页不在仓库根目录，而 workflow 也已经约定把正式发布产物推到 `gh-pages`。如果你想完全不使用 `gh-pages`，那才应该改成 `main` + `/docs`，但这不是当前仓库的默认发布方式。
 
 ## 3. 配置 GitHub Actions 权限
 
@@ -54,21 +62,37 @@ git push -u origin main
 7. 将新的数据文件提交回主分支
 8. 将 `docs/` 发布到 `gh-pages`
 
-## 5. 首次触发
+默认还会每天自动运行一次，当前 cron 为 `0 1 * * *`，也就是每天 `01:00 UTC`，对应北京时间 `09:00`。
 
-### 方法一：手动触发
+如果要让 `OpenReview` 也稳定进入主流程，需要额外配置 GitHub Actions secrets。因为在 `2026-03-31` 的实测里，OpenReview 匿名 REST 查询会返回 `403`。
+
+推荐 secret：
+
+- `OPENREVIEW_ACCESS_TOKEN`
+
+兼容 fallback：
+
+- `OPENREVIEW_USERNAME`
+- `OPENREVIEW_PASSWORD`
+
+工作流会先尝试匿名查询，失败后自动读取上述 secret 做认证重试；如果没有配置，则只跳过 OpenReview，不阻断 `ArXiv / Crossref / DBLP` 主流程。
+
+## 5. 首次触发
 
 1. 打开仓库 `Actions`
 2. 选择 `Update Papers Daily`
 3. 点击 `Run workflow`
+4. 等待 workflow 成功执行
+5. 确认远端已经出现 `gh-pages` 分支
+6. 再到 `Settings > Pages` 里选择 `gh-pages` 和 `/ (root)`
 
-### 方法二：提交触发
+注意：当前 workflow 支持“每天自动运行 + 手动触发”，但仍然没有配置“每次 push 自动触发”。
 
-```bash
-git add .
-git commit -m "Trigger workflow"
-git push
-```
+如果需要 OpenReview：
+
+1. 打开 `Settings > Secrets and variables > Actions`
+2. 新建 `OPENREVIEW_ACCESS_TOKEN`
+3. 或者改为同时配置 `OPENREVIEW_USERNAME` 与 `OPENREVIEW_PASSWORD`
 
 ## 6. 验证发布结果
 
@@ -77,7 +101,7 @@ git push
 3. 访问：
 
 ```text
-https://<your-github-username>.github.io/<repo-name>/
+https://Jay-XD.github.io/DailyPaperZWJ-main/
 ```
 
 ## 本地预览与线上访问的差异
@@ -120,6 +144,7 @@ conda run -n dailypaper python -m http.server 8000 --directory docs
 ### Pages 打开后是 404
 
 - 确认 `Pages` 配置的是 `gh-pages`
+- 如果仓库现在只有 `main`，先手动运行一次 workflow，让它创建 `gh-pages`
 - 确认 workflow 已成功运行一次
 
 ### 页面打开但没有数据
