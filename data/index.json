@@ -1,0 +1,1122 @@
+{
+  "generated_at": "2026-04-28 04:38:10 UTC",
+  "defaults": {
+    "interest_track": "core_rl_comms",
+    "sort": "relevance-desc"
+  },
+  "months": [
+    {
+      "month": "2026-05",
+      "count": 47,
+      "track_counts": {
+        "core_rl_comms": 33,
+        "other": 14
+      },
+      "status_counts": {
+        "published": 47
+      }
+    },
+    {
+      "month": "2026-04",
+      "count": 6239,
+      "track_counts": {
+        "core_rl_comms": 1272,
+        "secondary_llm_mm_nn": 1586,
+        "other": 3381
+      },
+      "status_counts": {
+        "accepted": 780,
+        "preprint": 4835,
+        "submitted": 375,
+        "published": 249
+      }
+    },
+    {
+      "month": "2026-03",
+      "count": 1199,
+      "track_counts": {
+        "core_rl_comms": 375,
+        "secondary_llm_mm_nn": 199,
+        "other": 625
+      },
+      "status_counts": {
+        "published": 196,
+        "preprint": 813,
+        "accepted": 112,
+        "submitted": 78
+      }
+    },
+    {
+      "month": "2026-02",
+      "count": 185,
+      "track_counts": {
+        "core_rl_comms": 116,
+        "other": 69
+      },
+      "status_counts": {
+        "published": 185
+      }
+    },
+    {
+      "month": "2026-01",
+      "count": 2437,
+      "track_counts": {
+        "core_rl_comms": 1750,
+        "secondary_llm_mm_nn": 28,
+        "other": 659
+      },
+      "status_counts": {
+        "published": 2437
+      }
+    },
+    {
+      "month": "2025-12",
+      "count": 3103,
+      "track_counts": {
+        "core_rl_comms": 597,
+        "secondary_llm_mm_nn": 723,
+        "other": 1783
+      },
+      "status_counts": {
+        "submitted": 117,
+        "published": 501,
+        "accepted": 248,
+        "preprint": 2237
+      }
+    },
+    {
+      "month": "2025-11",
+      "count": 5265,
+      "track_counts": {
+        "core_rl_comms": 754,
+        "secondary_llm_mm_nn": 1309,
+        "other": 3202
+      },
+      "status_counts": {
+        "preprint": 3845,
+        "published": 496,
+        "accepted": 687,
+        "submitted": 237
+      }
+    },
+    {
+      "month": "2025-10",
+      "count": 1424,
+      "track_counts": {
+        "core_rl_comms": 410,
+        "secondary_llm_mm_nn": 345,
+        "other": 669
+      },
+      "status_counts": {
+        "published": 540,
+        "submitted": 223,
+        "preprint": 584,
+        "accepted": 77
+      }
+    },
+    {
+      "month": "2025-09",
+      "count": 740,
+      "track_counts": {
+        "core_rl_comms": 340,
+        "secondary_llm_mm_nn": 155,
+        "other": 245
+      },
+      "status_counts": {
+        "published": 740
+      }
+    },
+    {
+      "month": "2025-08",
+      "count": 401,
+      "track_counts": {
+        "core_rl_comms": 291,
+        "other": 110
+      },
+      "status_counts": {
+        "published": 401
+      }
+    },
+    {
+      "month": "2025-07",
+      "count": 369,
+      "track_counts": {
+        "core_rl_comms": 277,
+        "other": 92
+      },
+      "status_counts": {
+        "published": 369
+      }
+    },
+    {
+      "month": "2025-06",
+      "count": 351,
+      "track_counts": {
+        "core_rl_comms": 286,
+        "other": 65
+      },
+      "status_counts": {
+        "published": 351
+      }
+    },
+    {
+      "month": "2025-05",
+      "count": 714,
+      "track_counts": {
+        "core_rl_comms": 269,
+        "secondary_llm_mm_nn": 176,
+        "other": 269
+      },
+      "status_counts": {
+        "published": 690,
+        "submitted": 24
+      }
+    },
+    {
+      "month": "2025-04",
+      "count": 151,
+      "track_counts": {
+        "core_rl_comms": 111,
+        "other": 40
+      },
+      "status_counts": {
+        "published": 151
+      }
+    },
+    {
+      "month": "2025-01",
+      "count": 1869,
+      "track_counts": {
+        "core_rl_comms": 488,
+        "secondary_llm_mm_nn": 183,
+        "other": 1198
+      },
+      "status_counts": {
+        "published": 1846,
+        "submitted": 23
+      }
+    },
+    {
+      "month": "2024-10",
+      "count": 302,
+      "track_counts": {
+        "core_rl_comms": 49,
+        "secondary_llm_mm_nn": 141,
+        "other": 112
+      },
+      "status_counts": {
+        "submitted": 198,
+        "published": 104
+      }
+    },
+    {
+      "month": "2024-09",
+      "count": 382,
+      "track_counts": {
+        "core_rl_comms": 49,
+        "secondary_llm_mm_nn": 156,
+        "other": 177
+      },
+      "status_counts": {
+        "published": 382
+      }
+    },
+    {
+      "month": "2024-05",
+      "count": 419,
+      "track_counts": {
+        "core_rl_comms": 66,
+        "secondary_llm_mm_nn": 150,
+        "other": 203
+      },
+      "status_counts": {
+        "published": 400,
+        "submitted": 19
+      }
+    },
+    {
+      "month": "2024-03",
+      "count": 3,
+      "track_counts": {
+        "secondary_llm_mm_nn": 3
+      },
+      "status_counts": {
+        "published": 3
+      }
+    },
+    {
+      "month": "2024-02",
+      "count": 1,
+      "track_counts": {
+        "other": 1
+      },
+      "status_counts": {
+        "published": 1
+      }
+    },
+    {
+      "month": "2024-01",
+      "count": 805,
+      "track_counts": {
+        "core_rl_comms": 172,
+        "secondary_llm_mm_nn": 97,
+        "other": 536
+      },
+      "status_counts": {
+        "published": 805
+      }
+    },
+    {
+      "month": "2023-10",
+      "count": 286,
+      "track_counts": {
+        "core_rl_comms": 34,
+        "secondary_llm_mm_nn": 133,
+        "other": 119
+      },
+      "status_counts": {
+        "submitted": 210,
+        "published": 76
+      }
+    },
+    {
+      "month": "2023-09",
+      "count": 18,
+      "track_counts": {
+        "core_rl_comms": 2,
+        "secondary_llm_mm_nn": 10,
+        "other": 6
+      },
+      "status_counts": {
+        "published": 18
+      }
+    }
+  ],
+  "filters": {
+    "interest_track": [
+      {
+        "value": "core_rl_comms",
+        "label": "RL+通信主线",
+        "count": 7741
+      },
+      {
+        "value": "secondary_llm_mm_nn",
+        "label": "LLM/多模态/神经网络",
+        "count": 5394
+      },
+      {
+        "value": "other",
+        "label": "其他",
+        "count": 13575
+      }
+    ],
+    "publication_status": [
+      {
+        "value": "published",
+        "label": "已发表",
+        "count": 10988
+      },
+      {
+        "value": "accepted",
+        "label": "已录用",
+        "count": 1904
+      },
+      {
+        "value": "submitted",
+        "label": "投稿中",
+        "count": 1504
+      },
+      {
+        "value": "preprint",
+        "label": "预印本",
+        "count": 12314
+      },
+      {
+        "value": "unknown",
+        "label": "未知",
+        "count": 0
+      }
+    ],
+    "paper_type": [
+      {
+        "value": "conference",
+        "label": "会议",
+        "count": 6024
+      },
+      {
+        "value": "journal",
+        "label": "期刊",
+        "count": 6177
+      },
+      {
+        "value": "review",
+        "label": "综述",
+        "count": 444
+      },
+      {
+        "value": "other",
+        "label": "其他",
+        "count": 14065
+      }
+    ],
+    "venue_tier": [
+      {
+        "value": "core_comms",
+        "label": "通信核心",
+        "count": 6458
+      },
+      {
+        "value": "related_comms",
+        "label": "通信相关",
+        "count": 1118
+      },
+      {
+        "value": "core_ai",
+        "label": "AI A类",
+        "count": 4587
+      },
+      {
+        "value": "other",
+        "label": "其他",
+        "count": 14547
+      }
+    ],
+    "venues": [
+      {
+        "value": "JSAC",
+        "label": "JSAC",
+        "count": 458,
+        "title": "IEEE Journal on Selected Areas in Communications"
+      },
+      {
+        "value": "TWC",
+        "label": "TWC",
+        "count": 828,
+        "title": "IEEE Transactions on Wireless Communications"
+      },
+      {
+        "value": "TMC",
+        "label": "TMC",
+        "count": 746,
+        "title": "IEEE Transactions on Mobile Computing"
+      },
+      {
+        "value": "IoTJ",
+        "label": "IoTJ",
+        "count": 1519,
+        "title": "IEEE Internet of Things Journal"
+      },
+      {
+        "value": "ToN",
+        "label": "ToN",
+        "count": 2,
+        "title": "IEEE/ACM Transactions on Networking"
+      },
+      {
+        "value": "TCOM",
+        "label": "TCOM",
+        "count": 832,
+        "title": "IEEE Transactions on Communications"
+      },
+      {
+        "value": "TVT",
+        "label": "TVT",
+        "count": 982,
+        "title": "IEEE Transactions on Vehicular Technology"
+      },
+      {
+        "value": "WCL",
+        "label": "WCL",
+        "count": 744,
+        "title": "IEEE Wireless Communications Letters"
+      },
+      {
+        "value": "INFOCOM",
+        "label": "INFOCOM",
+        "count": 347,
+        "title": "IEEE INFOCOM"
+      },
+      {
+        "value": "Globecom",
+        "label": "Globecom",
+        "count": 722,
+        "title": "IEEE Globecom"
+      },
+      {
+        "value": "WCNC",
+        "label": "WCNC",
+        "count": 365,
+        "title": "IEEE WCNC"
+      },
+      {
+        "value": "ICC",
+        "label": "ICC",
+        "count": 23,
+        "title": "IEEE ICC"
+      },
+      {
+        "value": "PIMRC",
+        "label": "PIMRC",
+        "count": 3,
+        "title": "IEEE PIMRC"
+      },
+      {
+        "value": "DySPAN",
+        "label": "DySPAN",
+        "count": 1,
+        "title": "IEEE DySPAN"
+      },
+      {
+        "value": "SECON",
+        "label": "SECON",
+        "count": 2,
+        "title": "IEEE SECON"
+      },
+      {
+        "value": "MILCOM",
+        "label": "MILCOM",
+        "count": 2,
+        "title": "MILCOM"
+      },
+      {
+        "value": "NeurIPS",
+        "label": "NeurIPS",
+        "count": 1412,
+        "title": "NeurIPS"
+      },
+      {
+        "value": "ICLR",
+        "label": "ICLR",
+        "count": 1694,
+        "title": "ICLR"
+      },
+      {
+        "value": "ICML",
+        "label": "ICML",
+        "count": 1124,
+        "title": "ICML"
+      },
+      {
+        "value": "AAAI",
+        "label": "AAAI",
+        "count": 357,
+        "title": "AAAI"
+      },
+      {
+        "value": "IEEE Journal of Biomedical and Health Informatics",
+        "label": "IEEE Journal of Biomedical and Health Informatics",
+        "count": 3,
+        "title": "IEEE Journal of Biomedical and Health Informatics"
+      },
+      {
+        "value": "IEEE Transactions on Power Systems",
+        "label": "IEEE Transactions on Power Systems",
+        "count": 3,
+        "title": "IEEE Transactions on Power Systems"
+      },
+      {
+        "value": "IEEE Transactions on Signal Processing",
+        "label": "IEEE Transactions on Signal Processing",
+        "count": 3,
+        "title": "IEEE Transactions on Signal Processing"
+      },
+      {
+        "value": "IEEE Journal of Biomedical and Health Informatics (JBHI) for review",
+        "label": "IEEE Journal of Biomedical and Health Informatics (JBHI) for review",
+        "count": 2,
+        "title": "IEEE Journal of Biomedical and Health Informatics (JBHI) for review"
+      },
+      {
+        "value": "IEEE Transactions on Dependable and Secure Computing",
+        "label": "IEEE Transactions on Dependable and Secure Computing",
+        "count": 2,
+        "title": "IEEE Transactions on Dependable and Secure Computing"
+      },
+      {
+        "value": "IEEE Transactions on Industrial Informatics",
+        "label": "IEEE Transactions on Industrial Informatics",
+        "count": 2,
+        "title": "IEEE Transactions on Industrial Informatics"
+      },
+      {
+        "value": "IEEE Transactions on Information Forensics and Security",
+        "label": "IEEE Transactions on Information Forensics and Security",
+        "count": 2,
+        "title": "IEEE Transactions on Information Forensics and Security"
+      },
+      {
+        "value": "IEEE Transactions on Information Theory",
+        "label": "IEEE Transactions on Information Theory",
+        "count": 2,
+        "title": "IEEE Transactions on Information Theory"
+      },
+      {
+        "value": "IEEE Transactions on Knowledge and Data Engineering (TKDE)",
+        "label": "IEEE Transactions on Knowledge and Data Engineering (TKDE)",
+        "count": 2,
+        "title": "IEEE Transactions on Knowledge and Data Engineering (TKDE)"
+      },
+      {
+        "value": "IEEE Transactions on Medical Imaging",
+        "label": "IEEE Transactions on Medical Imaging",
+        "count": 2,
+        "title": "IEEE Transactions on Medical Imaging"
+      },
+      {
+        "value": "IEEE Transactions on Neural Systems and Rehabilitation Engineering",
+        "label": "IEEE Transactions on Neural Systems and Rehabilitation Engineering",
+        "count": 2,
+        "title": "IEEE Transactions on Neural Systems and Rehabilitation Engineering"
+      },
+      {
+        "value": "IEEE Transactions on Robotics (T-RO)",
+        "label": "IEEE Transactions on Robotics (T-RO)",
+        "count": 2,
+        "title": "IEEE Transactions on Robotics (T-RO)"
+      },
+      {
+        "value": "IEEE Transactions on Systems, Man, and Cybernetics: Systems",
+        "label": "IEEE Transactions on Systems, Man, and Cybernetics: Systems",
+        "count": 2,
+        "title": "IEEE Transactions on Systems, Man, and Cybernetics: Systems"
+      },
+      {
+        "value": "IEEE Transactions on Visualization and Computer Graphics",
+        "label": "IEEE Transactions on Visualization and Computer Graphics",
+        "count": 2,
+        "title": "IEEE Transactions on Visualization and Computer Graphics"
+      },
+      {
+        "value": "IEEE Journal of Biomedical and Health Informatics (under review)",
+        "label": "IEEE Journal of Biomedical and Health Informatics (under review)",
+        "count": 1,
+        "title": "IEEE Journal of Biomedical and Health Informatics (under review)"
+      },
+      {
+        "value": "IEEE Journal of Selected Areas in Information Theory (IEEE JSAIT)",
+        "label": "IEEE Journal of Selected Areas in Information Theory (IEEE JSAIT)",
+        "count": 1,
+        "title": "IEEE Journal of Selected Areas in Information Theory (IEEE JSAIT)"
+      },
+      {
+        "value": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+        "label": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+        "count": 1,
+        "title": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing"
+      },
+      {
+        "value": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing)",
+        "label": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing)",
+        "count": 1,
+        "title": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing)"
+      },
+      {
+        "value": "IEEE Journal of Selected Topics in Signal Processing",
+        "label": "IEEE Journal of Selected Topics in Signal Processing",
+        "count": 1,
+        "title": "IEEE Journal of Selected Topics in Signal Processing"
+      },
+      {
+        "value": "IEEE Journal on Selected Areas in Information Theory special issue \"Theoretical Foundations for 6G-and-Beyond Wireless Networks'' on Oct 1 2025",
+        "label": "IEEE Journal on Selected Areas in Information Theory special issue \"Theoretical Foundations for 6G-and-Beyond Wireless Networks'' on Oct 1 2025",
+        "count": 1,
+        "title": "IEEE Journal on Selected Areas in Information Theory special issue \"Theoretical Foundations for 6G-and-Beyond Wireless Networks'' on Oct 1 2025"
+      },
+      {
+        "value": "IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT",
+        "label": "IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT",
+        "count": 1,
+        "title": "IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT"
+      },
+      {
+        "value": "IEEE Transactions on Aerospace and Electronic Systems (TAES)",
+        "label": "IEEE Transactions on Aerospace and Electronic Systems (TAES)",
+        "count": 1,
+        "title": "IEEE Transactions on Aerospace and Electronic Systems (TAES)"
+      },
+      {
+        "value": "IEEE Transactions on Affective computing",
+        "label": "IEEE Transactions on Affective computing",
+        "count": 1,
+        "title": "IEEE Transactions on Affective computing"
+      },
+      {
+        "value": "IEEE Transactions on Antennas and Propagation",
+        "label": "IEEE Transactions on Antennas and Propagation",
+        "count": 1,
+        "title": "IEEE Transactions on Antennas and Propagation"
+      },
+      {
+        "value": "IEEE Transactions on Artificial Intelligence",
+        "label": "IEEE Transactions on Artificial Intelligence",
+        "count": 1,
+        "title": "IEEE Transactions on Artificial Intelligence"
+      },
+      {
+        "value": "IEEE Transactions on Audio, Speech and Language Processing",
+        "label": "IEEE Transactions on Audio, Speech and Language Processing",
+        "count": 1,
+        "title": "IEEE Transactions on Audio, Speech and Language Processing"
+      },
+      {
+        "value": "IEEE Transactions on Automatic Control",
+        "label": "IEEE Transactions on Automatic Control",
+        "count": 1,
+        "title": "IEEE Transactions on Automatic Control"
+      },
+      {
+        "value": "IEEE Transactions on Automatic Control\" (submission date: January 30, 2026)",
+        "label": "IEEE Transactions on Automatic Control\" (submission date: January 30, 2026)",
+        "count": 1,
+        "title": "IEEE Transactions on Automatic Control\" (submission date: January 30, 2026)"
+      },
+      {
+        "value": "IEEE Transactions on Automatic Control, 2026",
+        "label": "IEEE Transactions on Automatic Control, 2026",
+        "count": 1,
+        "title": "IEEE Transactions on Automatic Control, 2026"
+      },
+      {
+        "value": "IEEE Transactions on Automation Science and Engineering (T-ASE)",
+        "label": "IEEE Transactions on Automation Science and Engineering (T-ASE)",
+        "count": 1,
+        "title": "IEEE Transactions on Automation Science and Engineering (T-ASE)"
+      },
+      {
+        "value": "IEEE Transactions on Automation Science and Engineering 2025",
+        "label": "IEEE Transactions on Automation Science and Engineering 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Automation Science and Engineering 2025"
+      },
+      {
+        "value": "IEEE Transactions on Biomedical Engineering as invited IEEE EMBC special issue paper",
+        "label": "IEEE Transactions on Biomedical Engineering as invited IEEE EMBC special issue paper",
+        "count": 1,
+        "title": "IEEE Transactions on Biomedical Engineering as invited IEEE EMBC special issue paper"
+      },
+      {
+        "value": "IEEE Transactions on Biometrics, Behavior, and Identity Science (TBIOM) for possible publication",
+        "label": "IEEE Transactions on Biometrics, Behavior, and Identity Science (TBIOM) for possible publication",
+        "count": 1,
+        "title": "IEEE Transactions on Biometrics, Behavior, and Identity Science (TBIOM) for possible publication"
+      },
+      {
+        "value": "IEEE Transactions on Cognitive Communications and Networking",
+        "label": "IEEE Transactions on Cognitive Communications and Networking",
+        "count": 1,
+        "title": "IEEE Transactions on Cognitive Communications and Networking"
+      },
+      {
+        "value": "IEEE Transactions on Cognitive Communications and Networking for possible publication",
+        "label": "IEEE Transactions on Cognitive Communications and Networking for possible publication",
+        "count": 1,
+        "title": "IEEE Transactions on Cognitive Communications and Networking for possible publication"
+      },
+      {
+        "value": "IEEE Transactions on Cognitive and Developmental Systems (2026)",
+        "label": "IEEE Transactions on Cognitive and Developmental Systems (2026)",
+        "count": 1,
+        "title": "IEEE Transactions on Cognitive and Developmental Systems (2026)"
+      },
+      {
+        "value": "IEEE Transactions on Computational Social Systems",
+        "label": "IEEE Transactions on Computational Social Systems",
+        "count": 1,
+        "title": "IEEE Transactions on Computational Social Systems"
+      },
+      {
+        "value": "IEEE Transactions on Computational Social Systems, pages 1-15, 2025",
+        "label": "IEEE Transactions on Computational Social Systems, pages 1-15, 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Computational Social Systems, pages 1-15, 2025"
+      },
+      {
+        "value": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (IEEE TCAD)",
+        "label": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (IEEE TCAD)",
+        "count": 1,
+        "title": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (IEEE TCAD)"
+      },
+      {
+        "value": "IEEE Transactions on Control Systems Technology (TCST)",
+        "label": "IEEE Transactions on Control Systems Technology (TCST)",
+        "count": 1,
+        "title": "IEEE Transactions on Control Systems Technology (TCST)"
+      },
+      {
+        "value": "IEEE Transactions on Cybernetics",
+        "label": "IEEE Transactions on Cybernetics",
+        "count": 1,
+        "title": "IEEE Transactions on Cybernetics"
+      },
+      {
+        "value": "IEEE Transactions on Education",
+        "label": "IEEE Transactions on Education",
+        "count": 1,
+        "title": "IEEE Transactions on Education"
+      },
+      {
+        "value": "IEEE Transactions on Emerging Topics in Computing",
+        "label": "IEEE Transactions on Emerging Topics in Computing",
+        "count": 1,
+        "title": "IEEE Transactions on Emerging Topics in Computing"
+      },
+      {
+        "value": "IEEE Transactions on Field Robotics",
+        "label": "IEEE Transactions on Field Robotics",
+        "count": 1,
+        "title": "IEEE Transactions on Field Robotics"
+      },
+      {
+        "value": "IEEE Transactions on Games",
+        "label": "IEEE Transactions on Games",
+        "count": 1,
+        "title": "IEEE Transactions on Games"
+      },
+      {
+        "value": "IEEE Transactions on Geoscience and Remote Sensing",
+        "label": "IEEE Transactions on Geoscience and Remote Sensing",
+        "count": 1,
+        "title": "IEEE Transactions on Geoscience and Remote Sensing"
+      },
+      {
+        "value": "IEEE Transactions on Geoscience and Remote Sensing (TGRS)",
+        "label": "IEEE Transactions on Geoscience and Remote Sensing (TGRS)",
+        "count": 1,
+        "title": "IEEE Transactions on Geoscience and Remote Sensing (TGRS)"
+      },
+      {
+        "value": "IEEE Transactions on Geoscience and Remote Sensing 63 (2025) 1-11",
+        "label": "IEEE Transactions on Geoscience and Remote Sensing 63 (2025) 1-11",
+        "count": 1,
+        "title": "IEEE Transactions on Geoscience and Remote Sensing 63 (2025) 1-11"
+      },
+      {
+        "value": "IEEE Transactions on Image Processing (TIP), 2025",
+        "label": "IEEE Transactions on Image Processing (TIP), 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Image Processing (TIP), 2025"
+      },
+      {
+        "value": "IEEE Transactions on Information Forensics and Security (TIFS)",
+        "label": "IEEE Transactions on Information Forensics and Security (TIFS)",
+        "count": 1,
+        "title": "IEEE Transactions on Information Forensics and Security (TIFS)"
+      },
+      {
+        "value": "IEEE Transactions on Information Theory (TIT)",
+        "label": "IEEE Transactions on Information Theory (TIT)",
+        "count": 1,
+        "title": "IEEE Transactions on Information Theory (TIT)"
+      },
+      {
+        "value": "IEEE Transactions on Information Theory for possible publication",
+        "label": "IEEE Transactions on Information Theory for possible publication",
+        "count": 1,
+        "title": "IEEE Transactions on Information Theory for possible publication"
+      },
+      {
+        "value": "IEEE Transactions on Instrumentation and Measurement, vol",
+        "label": "IEEE Transactions on Instrumentation and Measurement, vol",
+        "count": 1,
+        "title": "IEEE Transactions on Instrumentation and Measurement, vol"
+      },
+      {
+        "value": "IEEE Transactions on Intelligent Transportation Systems (IEEE T-ITS)",
+        "label": "IEEE Transactions on Intelligent Transportation Systems (IEEE T-ITS)",
+        "count": 1,
+        "title": "IEEE Transactions on Intelligent Transportation Systems (IEEE T-ITS)"
+      },
+      {
+        "value": "IEEE Transactions on Intelligent Transportation Systems, vol",
+        "label": "IEEE Transactions on Intelligent Transportation Systems, vol",
+        "count": 1,
+        "title": "IEEE Transactions on Intelligent Transportation Systems, vol"
+      },
+      {
+        "value": "IEEE Transactions on Intelligent Vehicles",
+        "label": "IEEE Transactions on Intelligent Vehicles",
+        "count": 1,
+        "title": "IEEE Transactions on Intelligent Vehicles"
+      },
+      {
+        "value": "IEEE Transactions on Knowledge and Data Engineering, vol",
+        "label": "IEEE Transactions on Knowledge and Data Engineering, vol",
+        "count": 1,
+        "title": "IEEE Transactions on Knowledge and Data Engineering, vol"
+      },
+      {
+        "value": "IEEE Transactions on Medical Imaging (TMI), March 2026",
+        "label": "IEEE Transactions on Medical Imaging (TMI), March 2026",
+        "count": 1,
+        "title": "IEEE Transactions on Medical Imaging (TMI), March 2026"
+      },
+      {
+        "value": "IEEE Transactions on Medical Imaging for possible publication",
+        "label": "IEEE Transactions on Medical Imaging for possible publication",
+        "count": 1,
+        "title": "IEEE Transactions on Medical Imaging for possible publication"
+      },
+      {
+        "value": "IEEE Transactions on Molecular, Biological, and Multi-Scale Communications (TMBMC)",
+        "label": "IEEE Transactions on Molecular, Biological, and Multi-Scale Communications (TMBMC)",
+        "count": 1,
+        "title": "IEEE Transactions on Molecular, Biological, and Multi-Scale Communications (TMBMC)"
+      },
+      {
+        "value": "IEEE Transactions on Multimedia (Regular Paper)",
+        "label": "IEEE Transactions on Multimedia (Regular Paper)",
+        "count": 1,
+        "title": "IEEE Transactions on Multimedia (Regular Paper)"
+      },
+      {
+        "value": "IEEE Transactions on Multimedia (TMM)",
+        "label": "IEEE Transactions on Multimedia (TMM)",
+        "count": 1,
+        "title": "IEEE Transactions on Multimedia (TMM)"
+      },
+      {
+        "value": "IEEE Transactions on Multimedia 2025",
+        "label": "IEEE Transactions on Multimedia 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Multimedia 2025"
+      },
+      {
+        "value": "IEEE Transactions on Network and Service Management (TNSM)",
+        "label": "IEEE Transactions on Network and Service Management (TNSM)",
+        "count": 1,
+        "title": "IEEE Transactions on Network and Service Management (TNSM)"
+      },
+      {
+        "value": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS), 2025",
+        "label": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS), 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS), 2025"
+      },
+      {
+        "value": "IEEE Transactions on Pattern Analysis and Machine Intelligence (2025)",
+        "label": "IEEE Transactions on Pattern Analysis and Machine Intelligence (2025)",
+        "count": 1,
+        "title": "IEEE Transactions on Pattern Analysis and Machine Intelligence (2025)"
+      },
+      {
+        "value": "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025",
+        "label": "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025"
+      },
+      {
+        "value": "IEEE Transactions on Pattern Analysis and Machine Intelligence, 31 (3), 458-474, March 2009",
+        "label": "IEEE Transactions on Pattern Analysis and Machine Intelligence, 31 (3), 458-474, March 2009",
+        "count": 1,
+        "title": "IEEE Transactions on Pattern Analysis and Machine Intelligence, 31 (3), 458-474, March 2009"
+      },
+      {
+        "value": "IEEE Transactions on Pattern Analysis and Machine Intelligence, vol",
+        "label": "IEEE Transactions on Pattern Analysis and Machine Intelligence, vol",
+        "count": 1,
+        "title": "IEEE Transactions on Pattern Analysis and Machine Intelligence, vol"
+      },
+      {
+        "value": "IEEE Transactions on Power Delivery, 2026",
+        "label": "IEEE Transactions on Power Delivery, 2026",
+        "count": 1,
+        "title": "IEEE Transactions on Power Delivery, 2026"
+      },
+      {
+        "value": "IEEE Transactions on Robotics (T-RO), 2025",
+        "label": "IEEE Transactions on Robotics (T-RO), 2025",
+        "count": 1,
+        "title": "IEEE Transactions on Robotics (T-RO), 2025"
+      },
+      {
+        "value": "IEEE Transactions on Robotics, vol",
+        "label": "IEEE Transactions on Robotics, vol",
+        "count": 1,
+        "title": "IEEE Transactions on Robotics, vol"
+      },
+      {
+        "value": "IEEE Transactions on Services Computing",
+        "label": "IEEE Transactions on Services Computing",
+        "count": 1,
+        "title": "IEEE Transactions on Services Computing"
+      },
+      {
+        "value": "IEEE Transactions on Signal and Information Processing over Networks",
+        "label": "IEEE Transactions on Signal and Information Processing over Networks",
+        "count": 1,
+        "title": "IEEE Transactions on Signal and Information Processing over Networks"
+      },
+      {
+        "value": "IEEE Transactions on Smart Grid",
+        "label": "IEEE Transactions on Smart Grid",
+        "count": 1,
+        "title": "IEEE Transactions on Smart Grid"
+      },
+      {
+        "value": "IEEE Transactions on Sustainable Energy",
+        "label": "IEEE Transactions on Sustainable Energy",
+        "count": 1,
+        "title": "IEEE Transactions on Sustainable Energy"
+      },
+      {
+        "value": "IEEE Transactions on Transportation Electrification, vol",
+        "label": "IEEE Transactions on Transportation Electrification, vol",
+        "count": 1,
+        "title": "IEEE Transactions on Transportation Electrification, vol"
+      },
+      {
+        "value": "IEEE/ASME Transactions on Mechatronics",
+        "label": "IEEE/ASME Transactions on Mechatronics",
+        "count": 1,
+        "title": "IEEE/ASME Transactions on Mechatronics"
+      },
+      {
+        "value": "IEEE/CAA Journal of Automatica Sinica",
+        "label": "IEEE/CAA Journal of Automatica Sinica",
+        "count": 1,
+        "title": "IEEE/CAA Journal of Automatica Sinica"
+      }
+    ],
+    "topic_tags": [
+      {
+        "value": "Wireless Communications",
+        "label": "Wireless Communications",
+        "count": 2484
+      },
+      {
+        "value": "Reinforcement Learning",
+        "label": "Reinforcement Learning",
+        "count": 1966
+      },
+      {
+        "value": "IoT Systems",
+        "label": "IoT Systems",
+        "count": 1763
+      },
+      {
+        "value": "Signal Processing",
+        "label": "Signal Processing",
+        "count": 1475
+      },
+      {
+        "value": "Scheduling & Control",
+        "label": "Scheduling & Control",
+        "count": 568
+      },
+      {
+        "value": "Federated Learning",
+        "label": "Federated Learning",
+        "count": 515
+      },
+      {
+        "value": "Resource Allocation",
+        "label": "Resource Allocation",
+        "count": 472
+      },
+      {
+        "value": "Network Optimization",
+        "label": "Network Optimization",
+        "count": 442
+      },
+      {
+        "value": "Edge Intelligence",
+        "label": "Edge Intelligence",
+        "count": 322
+      },
+      {
+        "value": "Semantic Communications",
+        "label": "Semantic Communications",
+        "count": 194
+      },
+      {
+        "value": "Multi-Agent RL",
+        "label": "Multi-Agent RL",
+        "count": 143
+      },
+      {
+        "value": "Networked Systems",
+        "label": "Networked Systems",
+        "count": 48
+      }
+    ],
+    "method_tags": [
+      {
+        "value": "LLM",
+        "label": "LLM",
+        "count": 3563
+      },
+      {
+        "value": "Multimodal",
+        "label": "Multimodal",
+        "count": 2723
+      },
+      {
+        "value": "Neural Network",
+        "label": "Neural Network",
+        "count": 2045
+      },
+      {
+        "value": "Transformer",
+        "label": "Transformer",
+        "count": 1587
+      },
+      {
+        "value": "Foundation Model",
+        "label": "Foundation Model",
+        "count": 740
+      },
+      {
+        "value": "Diffusion / Generative Model",
+        "label": "Diffusion / Generative Model",
+        "count": 714
+      },
+      {
+        "value": "Representation Learning",
+        "label": "Representation Learning",
+        "count": 571
+      },
+      {
+        "value": "Graph Neural Network",
+        "label": "Graph Neural Network",
+        "count": 283
+      }
+    ],
+    "scenario_tags": [
+      {
+        "value": "IoT / IIoT",
+        "label": "IoT / IIoT",
+        "count": 1760
+      },
+      {
+        "value": "RIS / MIMO / Beamforming",
+        "label": "RIS / MIMO / Beamforming",
+        "count": 1542
+      },
+      {
+        "value": "Vehicular / V2X",
+        "label": "Vehicular / V2X",
+        "count": 1167
+      },
+      {
+        "value": "UAV / Drone Network",
+        "label": "UAV / Drone Network",
+        "count": 614
+      },
+      {
+        "value": "Satellite / NTN",
+        "label": "Satellite / NTN",
+        "count": 449
+      },
+      {
+        "value": "5G/6G",
+        "label": "5G/6G",
+        "count": 441
+      },
+      {
+        "value": "MEC / Edge Cloud",
+        "label": "MEC / Edge Cloud",
+        "count": 189
+      }
+    ]
+  }
+}
