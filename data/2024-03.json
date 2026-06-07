@@ -1,0 +1,169 @@
+[
+  {
+    "scenario_tags": [],
+    "title": "Image Authenticity Detection using Eye Gazing Data:  A Performance Comparison Beyond Human Capabilities  via Attention Mechanism, ResNet, and Cascade  Strategies",
+    "interest_track": "secondary_llm_mm_nn",
+    "project_link": null,
+    "venue_type": "conference",
+    "source_url": "https://openreview.net/forum?id=mnyXZBa5dP",
+    "venue_tier": "core_ai",
+    "code_link": null,
+    "categories": [],
+    "venue": "ICLR",
+    "paper_type": "conference",
+    "match_reasons": [
+      "method:Transformer",
+      "method:Neural Network",
+      "signal:core_ai_venue",
+      "signal:published",
+      "track:secondary_llm_mm_nn"
+    ],
+    "pdf_url": "https://openreview.net/pdf?id=mnyXZBa5dP",
+    "method_tags": [
+      "Transformer",
+      "Neural Network"
+    ],
+    "abstract": "In the digital age, determining the authenticity of images has become \nincreasingly crucial. This study aims to explore the capability of machine \nlearning models in identifying manipulated images using eye movement data and \ncompares this with human judgment. We collected a series of both manipulated \nand unaltered images and conducted eye-tracking experiments on a set of \nparticipants. After data preprocessing, various machine learning models were \ntrained and validated, including a simple classifier, cascade-optimized classifier, \nand models integrating attention mechanisms with ResNet architectures. Results \nindicate that all models outperformed the baseline set by human judgment. \nSpecifically, the Attention-ResNet model achieved the highest accuracy at 0.685, \nmaking it the top-performing model. Our analysis delves further into the stability, \ngeneralization capabilities, and practical value of these models. Ultimately, this \nresearch underscores the immense potential of deep learning strategies in \nverifying image authenticity, providing valuable insights for future research and \napplications.",
+    "topic_tags": [],
+    "venue_name": "ICLR",
+    "relevance_score": 21,
+    "publication_status": "published",
+    "tags": [
+      "Transformer",
+      "Neural Network"
+    ],
+    "source": "OpenReview",
+    "comment": "ICLR 2024 Conference Desk Rejected Submission",
+    "venue_filter_value": "ICLR",
+    "venue_acronym": "ICLR",
+    "conference": "ICLR",
+    "doi_url": null,
+    "primary_category": null,
+    "published": "2024-03-25",
+    "doi": null,
+    "journal_ref": null,
+    "normalized_title": "image authenticity detection using eye gazing data a performance comparison beyond human capabilities via attention mechanism resnet and cascade strategies",
+    "authors": [
+      "Ping Zhang"
+    ],
+    "source_provider": "openreview",
+    "updated": "2024-03-25",
+    "arxiv_url": "https://arxiv.org/abs/openreview:mnyXZBa5dP",
+    "id": "openreview:mnyXZBa5dP",
+    "arxiv_id": "openreview:mnyXZBa5dP",
+    "venue_filter_label": "ICLR",
+    "matched_from": "explicit"
+  },
+  {
+    "scenario_tags": [],
+    "title": "Affine feature response transforms",
+    "interest_track": "secondary_llm_mm_nn",
+    "project_link": null,
+    "venue_type": "conference",
+    "source_url": "https://openreview.net/forum?id=OpWg0ldkcB",
+    "venue_tier": "core_ai",
+    "code_link": null,
+    "categories": [],
+    "venue": "ICLR",
+    "paper_type": "conference",
+    "match_reasons": [
+      "method:Transformer",
+      "method:Neural Network",
+      "signal:core_ai_venue",
+      "signal:published",
+      "track:secondary_llm_mm_nn"
+    ],
+    "pdf_url": "https://openreview.net/pdf?id=OpWg0ldkcB",
+    "method_tags": [
+      "Transformer",
+      "Neural Network"
+    ],
+    "abstract": "We introduce affine feature response transforms (AFRT, \\’e-fert \\), - a new family of neural encoding models based on spatial transformer networks (STNs). AFRT factorises receptive fields into a sequential affine component with 3 interpretable parameters (Θ for shifting and scaling) and response components with a small number of feature weights per response, which drastically simplifies the state-of-the-art neural encoding models and significantly improves performance of the encoding model. Additionally, our investigation delves into the sizes of the AFRT-generated receptive fields at various depth levels within the neural network. Our findings reveal a correspondence between these sizes and the information complexity present in corresponding brain regions, offering valuable insights into the behavior of the model, which demonstrate the benefits of incorporating spatial specificity into neural encoding models and potentially offers a new avenue for retinotopic mapping.",
+    "topic_tags": [],
+    "venue_name": "ICLR",
+    "relevance_score": 21,
+    "publication_status": "published",
+    "tags": [
+      "Transformer",
+      "Neural Network"
+    ],
+    "source": "OpenReview",
+    "comment": "ICLR 2024 Conference Desk Rejected Submission",
+    "venue_filter_value": "ICLR",
+    "venue_acronym": "ICLR",
+    "conference": "ICLR",
+    "doi_url": null,
+    "primary_category": null,
+    "published": "2024-03-25",
+    "doi": null,
+    "journal_ref": null,
+    "normalized_title": "affine feature response transforms",
+    "authors": [
+      "Lynn Le",
+      "Nils Kimman",
+      "Thirza Dado",
+      "Yağmur Güçlütürk",
+      "Umut Güçlü"
+    ],
+    "source_provider": "openreview",
+    "updated": "2024-03-25",
+    "arxiv_url": "https://arxiv.org/abs/openreview:OpWg0ldkcB",
+    "id": "openreview:OpWg0ldkcB",
+    "arxiv_id": "openreview:OpWg0ldkcB",
+    "venue_filter_label": "ICLR",
+    "matched_from": "explicit"
+  },
+  {
+    "scenario_tags": [],
+    "title": "Training graph backward compatible embeddings",
+    "interest_track": "secondary_llm_mm_nn",
+    "project_link": null,
+    "venue_type": "conference",
+    "source_url": "https://openreview.net/forum?id=H9D1revQeW",
+    "venue_tier": "core_ai",
+    "code_link": null,
+    "categories": [],
+    "venue": "ICLR",
+    "paper_type": "conference",
+    "match_reasons": [
+      "method:Representation Learning",
+      "signal:core_ai_venue",
+      "signal:published",
+      "track:secondary_llm_mm_nn"
+    ],
+    "pdf_url": "https://openreview.net/pdf?id=H9D1revQeW",
+    "method_tags": [
+      "Representation Learning"
+    ],
+    "abstract": "In this paper we study the problem of training backward compatible embeddings.\nWe suggest framework to train neural networks end-to-end using contrastive learning. Applying contrastive learning allow us to improve exciting method, BCAligner, for solving backward compatibility problem and obtain significant metrics improvement. We consider graph neural networks (GCN, GAT) for our experiments and use open-source graph datasets (Cora, CiteSeer) to compare methods. Our method outperform BC-Aligner by 6%/5% accuracy for Cora/CiteSeer\ndatasets correspondingly.",
+    "topic_tags": [],
+    "venue_name": "ICLR",
+    "relevance_score": 18,
+    "publication_status": "published",
+    "tags": [
+      "Representation Learning"
+    ],
+    "source": "OpenReview",
+    "comment": "ICLR 2024 Conference Desk Rejected Submission",
+    "venue_filter_value": "ICLR",
+    "venue_acronym": "ICLR",
+    "conference": "ICLR",
+    "doi_url": null,
+    "primary_category": null,
+    "published": "2024-03-25",
+    "doi": null,
+    "journal_ref": null,
+    "normalized_title": "training graph backward compatible embeddings",
+    "authors": [
+      "Daniil Bondarev",
+      "Dmitrii Kiselev"
+    ],
+    "source_provider": "openreview",
+    "updated": "2024-03-25",
+    "arxiv_url": "https://arxiv.org/abs/openreview:H9D1revQeW",
+    "id": "openreview:H9D1revQeW",
+    "arxiv_id": "openreview:H9D1revQeW",
+    "venue_filter_label": "ICLR",
+    "matched_from": "explicit"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "scenario_tags": [],
+    "title": "Deceptive Fairness Attacks on Graphs via Meta Learning",
+    "interest_track": "other",
+    "project_link": null,
+    "venue_type": "conference",
+    "source_url": "https://openreview.net/forum?id=iS5ADHNg2A",
+    "venue_tier": "core_ai",
+    "code_link": null,
+    "categories": [],
+    "venue": "ICLR",
+    "paper_type": "conference",
+    "match_reasons": [
+      "signal:core_ai_venue",
+      "signal:published"
+    ],
+    "pdf_url": "https://openreview.net/pdf?id=iS5ADHNg2A",
+    "method_tags": [],
+    "abstract": "We study deceptive fairness attacks on graphs to answer the following question: How can we achieve poisoning attacks on a graph learning model to exacerbate the bias deceptively? We answer this question via a bi-level optimization problem and propose a meta learning-based framework named FATE. FATE is broadly applicable with respect to various fairness definitions and graph learning models, as well as arbitrary choices of manipulation operations. We further instantiate FATE to attack statistical parity or individual fairness on graph neural networks. We conduct extensive experimental evaluations on real-world datasets in the task of semi-supervised node classification. The experimental results demonstrate that FATE could amplify the bias of graph neural networks with or without fairness consideration while maintaining the utility on the downstream task. We hope this paper provides insights into the adversarial robustness of fair graph learning and can shed light on designing robust and fair graph learning in future studies.",
+    "topic_tags": [],
+    "venue_name": "ICLR",
+    "relevance_score": 7,
+    "publication_status": "published",
+    "tags": [],
+    "source": "OpenReview",
+    "comment": "Accept (poster)",
+    "venue_filter_value": "ICLR",
+    "venue_acronym": "ICLR",
+    "conference": "ICLR",
+    "doi_url": null,
+    "primary_category": null,
+    "published": "2024-02-02",
+    "doi": null,
+    "journal_ref": null,
+    "normalized_title": "deceptive fairness attacks on graphs via meta learning",
+    "authors": [
+      "Jian Kang",
+      "Yinglong Xia",
+      "Ross Maciejewski",
+      "Jiebo Luo",
+      "Hanghang Tong"
+    ],
+    "source_provider": "openreview",
+    "updated": "2024-03-14",
+    "arxiv_url": "https://arxiv.org/abs/openreview:iS5ADHNg2A",
+    "id": "openreview:iS5ADHNg2A",
+    "arxiv_id": "openreview:iS5ADHNg2A",
+    "venue_filter_label": "ICLR",
+    "matched_from": "explicit"
+  }
+]
